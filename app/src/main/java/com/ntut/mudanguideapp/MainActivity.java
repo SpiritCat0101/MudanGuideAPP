@@ -21,7 +21,6 @@ public class MainActivity extends AppCompatActivity
     private int BACK_PRESSED_INTERVAL = 2000;
 
     private DrawerLayout drawer;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

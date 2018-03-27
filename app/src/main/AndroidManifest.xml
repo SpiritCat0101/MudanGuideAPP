@@ -36,8 +36,8 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".CameraActivity"
-            android:screenOrientation="landscape"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.FullScreen"/>
     </application>
 
 </manifest>

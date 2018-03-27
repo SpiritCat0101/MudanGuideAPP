@@ -4,20 +4,15 @@ import android.content.Context;
 import android.graphics.SurfaceTexture;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraCaptureSession;
-import android.hardware.camera2.CameraCharacteristics;
 import android.hardware.camera2.CameraDevice;
 import android.hardware.camera2.CameraManager;
 import android.hardware.camera2.CaptureRequest;
-import android.hardware.camera2.params.StreamConfigurationMap;
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.support.annotation.NonNull;
 import android.view.Surface;
 import android.view.TextureView;
 import android.widget.Toast;
-
-import com.ntut.mudanguideapp.CameraActivity;
 
 import java.util.Collections;
 
@@ -77,15 +72,11 @@ public class CameraHandler {
         String cameraId;
         CameraManager manager = (CameraManager)context.getSystemService(Context.CAMERA_SERVICE);
         try{
-            cameraId=manager.getCameraIdList()[0];
-            CameraCharacteristics characteristics = manager.getCameraCharacteristics(cameraId);
-            StreamConfigurationMap map = characteristics.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP);
-            assert map != null;
-            manager.openCamera(cameraId,stateCallback,null);
-
-        } catch (CameraAccessException e) {
-            e.printStackTrace();
-        } catch (SecurityException e) {
+            if(manager!=null) {
+                cameraId=manager.getCameraIdList()[0];
+                manager.openCamera(cameraId,stateCallback,null);
+            }
+        } catch (CameraAccessException | SecurityException | NullPointerException e) {
             e.printStackTrace();
         }
     }

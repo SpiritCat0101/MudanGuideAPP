@@ -1,29 +1,22 @@
 package com.ntut.mudanguideapp;
 
-import android.hardware.Sensor;
-import android.hardware.SensorEvent;
-import android.hardware.SensorEventListener;
-import android.hardware.SensorManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.TextureView;
+import android.widget.TextView;
 
 import com.ntut.mudanguideapp.camera.CameraHandler;
+import com.ntut.mudanguideapp.sensor.CompassHandler;
+import com.ntut.mudanguideapp.sensor.OrientationChangeListener;
 
 public class CameraActivity extends AppCompatActivity {
     private CameraHandler cameraHandler;
     private TextureView cameraPreview;
 
-    private SensorManager sensorManager;
+    private CompassHandler compassHandler;
 
-    float deltap=10;
-    float deltam=-10;
-
-    float[] gravity;
-    float[] geomagnetic;
-    float Rotation[] = new float[9];
-    float[] degree = new float[3];
-    float currentDegree;
+    private TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,56 +24,30 @@ public class CameraActivity extends AppCompatActivity {
         setContentView(R.layout.activity_camera);
         cameraHandler=new CameraHandler(this);
         cameraPreview=findViewById(R.id.camera_preview);
+        textView=findViewById(R.id.textView2);
 
-        sensorManager=(SensorManager) getSystemService(SENSOR_SERVICE);
+        compassHandler=new CompassHandler(this);
+        compassHandler.setListener(ocl);
     }
 
     @Override
     protected void onResume() {
         cameraHandler.startPreview(cameraPreview);
-        if(sensorManager!=null){
-            Sensor magnetic=sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
-            Sensor accelerometer=sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-            sensorManager.registerListener(sel,magnetic,SensorManager.SENSOR_DELAY_GAME);
-            sensorManager.registerListener(sel,accelerometer,SensorManager.SENSOR_DELAY_GAME);
-        }
+        compassHandler.startCompass();
         super.onResume();
     }
 
     @Override
     protected void onPause() {
         cameraHandler.stopPreview();
-        sensorManager.unregisterListener(sel);
+        compassHandler.stopCompass();
         super.onPause();
     }
 
-    private void tagUpdate(){
-
-    }
-
-    private SensorEventListener sel=new SensorEventListener() {
+    private OrientationChangeListener ocl=new OrientationChangeListener() {
         @Override
-        public void onSensorChanged(SensorEvent event) {
-            if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
-                gravity = event.values;
-            }
-            if (event.sensor.getType() == Sensor.TYPE_MAGNETIC_FIELD) {
-                geomagnetic = event.values;
-            }
-            if (gravity != null && geomagnetic != null) {
-
-                SensorManager.getRotationMatrix(Rotation, null, gravity,
-                        geomagnetic);
-                SensorManager.getOrientation(Rotation, degree);
-
-                currentDegree = (float) Math.toDegrees(degree[0]);
-                tagUpdate();
-            }
-        }
-
-        @Override
-        public void onAccuracyChanged(Sensor sensor, int accuracy) {
-
+        public void onOrientationChange(double orientation) {
+            textView.setText(Double.toString(orientation));
         }
     };
 }

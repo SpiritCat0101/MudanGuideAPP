@@ -11,11 +11,12 @@ import android.os.Bundle;
 import android.util.Log;
 
 public class launch extends AppCompatActivity {
-    private static final int  REQUEST_GPS = 1;
+    private static final int  REQUEST = 1;
 
     private final String[] Permission={
             Manifest.permission.ACCESS_FINE_LOCATION,
-            Manifest.permission.ACCESS_COARSE_LOCATION
+            Manifest.permission.ACCESS_COARSE_LOCATION,
+            Manifest.permission.CAMERA
     };
 
     boolean check_permission=true;
@@ -47,10 +48,11 @@ public class launch extends AppCompatActivity {
 
     private void getPermission(){
         if(Build.VERSION.SDK_INT>= Build.VERSION_CODES.M){
-            int per= ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
-            if(per== PackageManager.PERMISSION_DENIED){
+            int locationPer= ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
+            int cameraPer= ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA);
+            if(locationPer== PackageManager.PERMISSION_DENIED || cameraPer== PackageManager.PERMISSION_DENIED){
                 check_permission=false;
-                ActivityCompat.requestPermissions(this,Permission,REQUEST_GPS);
+                ActivityCompat.requestPermissions(this,Permission,REQUEST);
             }
         }
     }
@@ -58,7 +60,7 @@ public class launch extends AppCompatActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode) {
-            case REQUEST_GPS:
+            case REQUEST:
                 startActivity(new Intent(launch.this,MainActivity.class));
                 Log.i("launch", "get permission, change page");
                 break;

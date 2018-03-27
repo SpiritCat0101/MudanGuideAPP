@@ -46,7 +46,6 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         locationHandler=new LocationHandler(this,this);
-        locationHandler.startLocationUpdates(lcl);
     }
 
     @Override

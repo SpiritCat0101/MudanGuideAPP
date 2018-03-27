@@ -106,7 +106,7 @@ public class LocationHandler{
                 if (e instanceof ResolvableApiException) {
                     // Location settings are not satisfied, but this can be fixed
                     Log.i("LocationHandler","settings are not satisfied");
-                    // by showing the user a dialog.
+                    stopLocationUpdates();
                     Toast.makeText(context, "請開啟定位服務", Toast.LENGTH_LONG).show();
                     context.startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
                 }

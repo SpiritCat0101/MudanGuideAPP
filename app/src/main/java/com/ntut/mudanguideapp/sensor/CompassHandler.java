@@ -14,9 +14,9 @@ public class CompassHandler {
 
     private OrientationChangeListener listener;
 
-    private double currentDegree;
     private double previousDegree=0;
-    private double deltaDegree=0;
+
+    private double offset;
 
     public CompassHandler(Context c){
         sensorManager=(SensorManager) c.getSystemService(SENSOR_SERVICE);
@@ -26,7 +26,8 @@ public class CompassHandler {
         listener=cocl;
     }
 
-    public void startCompass(){
+    public void startCompass(int o){
+        offset=o;
         if(sensorManager!=null){
             Sensor magnetic=sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
             Sensor accelerometer=sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
@@ -46,6 +47,8 @@ public class CompassHandler {
         float[] geomagnetic;
         float Rotation[] = new float[9];
         float[] degree = new float[3];
+        double currentDegree;
+        double deltaDegree=0;
         @Override
         public void onSensorChanged(SensorEvent event) {
             if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
@@ -62,7 +65,7 @@ public class CompassHandler {
                 deltaDegree=Math.abs(previousDegree-currentDegree);
                 previousDegree=currentDegree;
                 if(deltaDegree>=1.5){
-                    listener.onOrientationChange(currentDegree);
+                    listener.onOrientationChange(outDegree(currentDegree));
                 }
             }
         }
@@ -72,4 +75,11 @@ public class CompassHandler {
 
         }
     };
+
+    private double outDegree(double degree){
+        degree-=offset;
+        if(degree>=180) degree-=360;
+        else if(degree<=-180) degree+=360;
+        return degree;
+    }
 }

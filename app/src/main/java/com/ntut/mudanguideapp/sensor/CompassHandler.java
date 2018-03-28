@@ -20,6 +20,7 @@ public class CompassHandler {
 
     public CompassHandler(Context c){
         sensorManager=(SensorManager) c.getSystemService(SENSOR_SERVICE);
+        Log.i("CompassHandler","construct success");
     }
 
     public void setListener(OrientationChangeListener cocl){

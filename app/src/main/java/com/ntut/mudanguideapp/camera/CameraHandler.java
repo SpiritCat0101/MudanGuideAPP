@@ -10,6 +10,7 @@ import android.hardware.camera2.CaptureRequest;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.Surface;
 import android.view.TextureView;
 import android.widget.Toast;
@@ -30,6 +31,7 @@ public class CameraHandler {
 
     public CameraHandler(Context c){
         this.context=c;
+        Log.i("CameraHandler","construct success");
     }
 
     public void startPreview(@NonNull TextureView textureView){
@@ -39,11 +41,13 @@ public class CameraHandler {
             openCamera();
         else
             cameraPreview.setSurfaceTextureListener(stl);
+        Log.i("CameraHandler","start preview");
     }
 
     public void stopPreview(){
         stopBackgroundThread();
         cameraPreview=null;
+        Log.i("CameraHandler","stop preview");
     }
 
     private TextureView.SurfaceTextureListener stl=new TextureView.SurfaceTextureListener() {

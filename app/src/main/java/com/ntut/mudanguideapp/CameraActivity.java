@@ -16,6 +16,11 @@ public class CameraActivity extends AppCompatActivity {
 
     private CompassHandler compassHandler;
 
+    private double[] ArObject_dir={-40,-140};
+    private String[] ArObject_name={"kitchen","TV"};
+
+    private double delta=7;
+
     private TextView textView;
     private TextView item;
 
@@ -55,13 +60,18 @@ public class CameraActivity extends AppCompatActivity {
     };
 
     private void checkOrientation(double degree){
-        if(degree<=-30 && degree >= -50){
-            item.setText("kitchen");
-            item.setVisibility(TextView.VISIBLE);
-        }else if(degree<=-130 && degree >= -150){
-            item.setText("TV");
-            item.setVisibility(TextView.VISIBLE);
-        }else{
+        boolean inShow=false;
+        for(int i=0;i<2;i++){
+            if(degree<=ArObject_dir[i]+delta && degree>=ArObject_dir[i]-delta){
+                item.setText(ArObject_name[i]);
+                item.setVisibility(TextView.VISIBLE);
+                inShow=true;
+                break;
+            }else{
+                inShow=false;
+            }
+        }
+        if(!inShow){
             item.setVisibility(TextView.INVISIBLE);
         }
     }

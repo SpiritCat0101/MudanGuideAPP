@@ -1,18 +1,24 @@
 package com.ntut.mudanguideapp;
 
-import android.support.v4.app.Fragment;
-import android.os.Bundle;
+import android.content.Context;
+import android.location.Location;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
-public class MainPagerTwo extends Fragment {
+public class MainPagerTwo extends PagerView {
+    private Context context;
+
+    public MainPagerTwo(Context c) {
+        super(c);
+        context=c;
+        View view = LayoutInflater.from(c).inflate(R.layout.pager_main, null);
+        TextView textView = view.findViewById(R.id.pager_text);
+        textView.setText("Page two");
+        addView(view);
+    }
+
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.pager_main, container, false);
-        TextView textView = rootView.findViewById(R.id.pager_text);
-        textView.setText("ViewFragment2");
-        return rootView;
+    public void onRefresh(Location location){
     }
 }

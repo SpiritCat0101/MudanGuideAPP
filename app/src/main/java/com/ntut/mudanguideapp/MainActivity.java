@@ -1,14 +1,15 @@
 package com.ntut.mudanguideapp;
 
-import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.Process;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.GravityCompat;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -17,8 +18,6 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.ntut.mudanguideapp.location.LocationChangeListener;
@@ -37,7 +36,6 @@ public class MainActivity extends AppCompatActivity
 
     private TabLayout tabLayout;
     private ViewPager viewPager;
-    private List<ConstraintLayout> pageList;
 
     private DrawerLayout drawer;
 
@@ -70,7 +68,7 @@ public class MainActivity extends AppCompatActivity
         super.onResume();
         location=locationHandler.getCurrentLocation();
         locationHandler.startLocationUpdates(lcl);
-        setUpTab();
+        setUpTabViewPage();
     }
 
     @Override
@@ -131,19 +129,13 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    private void setUpTab(){
-        tabLayout.addTab(tabLayout.newTab().setText("Page one"));
-        tabLayout.addTab(tabLayout.newTab().setText("Page two"));
-        setUpPager();
+    private void setUpTabViewPage(){
+        pagerAdapter adapter=new pagerAdapter(getSupportFragmentManager());
+        adapter.addFragment(new MainPagerOne(),"Page one");
+        adapter.addFragment(new MainPagerTwo(),"Page two");
+        viewPager.setAdapter(adapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
-        tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(viewPager));
-    }
-
-    private void setUpPager(){
-        pageList=new ArrayList<>();
-        pageList.add(new MainPagerOne(this));
-        pageList.add(new MainPagerTwo(this));
-        viewPager.setAdapter(new pagerAdapter());
+        tabLayout.setupWithViewPager(viewPager);
     }
 
     private LocationChangeListener lcl=new LocationChangeListener() {
@@ -154,26 +146,32 @@ public class MainActivity extends AppCompatActivity
         }
     };
 
-    private class pagerAdapter extends PagerAdapter {
+    private class pagerAdapter extends FragmentPagerAdapter {
+        private final List<Fragment> mFragmentList = new ArrayList<>();
+        private final List<String> mFragmentTitleList = new ArrayList<>();
+
+        pagerAdapter(FragmentManager manager) {
+            super(manager);
+        }
+
+        void addFragment(Fragment fragment, String title) {
+            mFragmentList.add(fragment);
+            mFragmentTitleList.add(title);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return mFragmentList.get(position);
+        }
 
         @Override
         public int getCount() {
-            return pageList.size();
+            return mFragmentList.size();
         }
 
         @Override
-        public boolean isViewFromObject(View view, Object o) {
-            return o == view;
-        }
-
-        @Override
-        public Object instantiateItem(ViewGroup container, int position) {
-            container.addView(pageList.get(position));
-            return pageList.get(position);
-        }
-        @Override
-        public void destroyItem(ViewGroup container, int position, Object object) {
-            container.removeView((View) object);
+        public CharSequence getPageTitle(int position) {
+            return mFragmentTitleList.get(position);
         }
     }
 }

@@ -20,7 +20,22 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_main" />
+    <ViewFlipper
+        android:id="@+id/main_flipper"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar">
 
+        <include
+            android:id="@+id/include_home"
+            layout="@layout/main_fragment_home"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <include
+            android:id="@+id/include_mudan"
+            layout="@layout/main_fragment_mudan" />
+
+    </ViewFlipper>
 
 </android.support.design.widget.CoordinatorLayout>

@@ -1,5 +1,8 @@
 package com.ntut.mudanguideapp;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.Process;
@@ -17,7 +20,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.Toast;
+import android.widget.ViewFlipper;
 
 import com.ntut.mudanguideapp.location.LocationChangeListener;
 import com.ntut.mudanguideapp.location.LocationHandler;
@@ -37,6 +42,8 @@ public class MainActivity extends AppCompatActivity
     private ViewPager viewPager;
     private List<PagerView> pageList;
     private int currentTab=0;
+
+    private ViewFlipper flipper;
 
     private DrawerLayout drawer;
 
@@ -58,6 +65,8 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        flipper=findViewById(R.id.main_flipper);
+
         tabLayout=findViewById(R.id.main_tabs);
         viewPager=findViewById(R.id.main_pager);
 
@@ -69,6 +78,7 @@ public class MainActivity extends AppCompatActivity
         super.onResume();
         location=locationHandler.getCurrentLocation();
         locationHandler.startLocationUpdates(lcl);
+        flipper.setDisplayedChild(0);
         setUpTab();
     }
 
@@ -122,7 +132,15 @@ public class MainActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        // Handle navigation view item clicks here.
+        switch(item.getItemId()){
+            case R.id.home:
+                flipper.setDisplayedChild(0);
+                break;
+            case R.id.mudan:
+                flipper.setDisplayedChild(1);
+                break;
+
+        }
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }

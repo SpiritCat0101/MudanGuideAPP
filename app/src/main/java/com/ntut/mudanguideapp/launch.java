@@ -15,8 +15,7 @@ public class launch extends AppCompatActivity {
 
     private final String[] Permission={
             Manifest.permission.ACCESS_FINE_LOCATION,
-            Manifest.permission.ACCESS_COARSE_LOCATION,
-            Manifest.permission.CAMERA
+            Manifest.permission.ACCESS_COARSE_LOCATION
     };
 
     boolean check_permission=true;
@@ -49,8 +48,7 @@ public class launch extends AppCompatActivity {
     private void getPermission(){
         if(Build.VERSION.SDK_INT>= Build.VERSION_CODES.M){
             int locationPer= ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
-            int cameraPer= ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA);
-            if(locationPer== PackageManager.PERMISSION_DENIED || cameraPer== PackageManager.PERMISSION_DENIED){
+            if(locationPer== PackageManager.PERMISSION_DENIED ){
                 check_permission=false;
                 ActivityCompat.requestPermissions(this,Permission,REQUEST);
             }

@@ -2,6 +2,27 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
+    <group android:checkableBehavior="single"
+        android:id="@+id/group_home">
+        <item android:id="@+id/home"
+            android:title="@string/drawer_home_string"/>
+    </group>
 
+    <group android:checkableBehavior="single"
+        android:id="@+id/group_info">
+        <item android:id="@+id/mudan"
+            android:title="@string/drawer_mudan_string"/>
+        <item android:id="@+id/sight"
+            android:title="@string/drawer_sight_string"/>
+        <item android:id="@+id/map"
+            android:title="@string/drawer_map_string"/>
+        <item android:id="@+id/promote"
+            android:title="@string/drawer_promote_string"/>
+    </group>
 
+    <group android:checkableBehavior="single"
+        android:id="@+id/group_about">
+        <item android:id="@+id/about"
+            android:title="@string/drawer_about_string"/>
+    </group>
 </menu>

@@ -1,26 +1,18 @@
 package com.ntut.mudanguideapp;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.Process;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
@@ -38,10 +30,8 @@ public class MainActivity extends AppCompatActivity
 
     private long currentBackPressedTime = 0;
 
-    private TabLayout tabLayout;
-    private ViewPager viewPager;
-    private List<PagerView> pageList;
-    private int currentTab=0;
+    private List<PagerActive> pageList;
+    private int currentPage=0;
 
     private ViewFlipper flipper;
 
@@ -66,9 +56,7 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         flipper=findViewById(R.id.main_flipper);
-
-        tabLayout=findViewById(R.id.main_tabs);
-        viewPager=findViewById(R.id.main_pager);
+        setUpPageList();
 
         locationHandler=new LocationHandler(this,this);
     }
@@ -78,14 +66,17 @@ public class MainActivity extends AppCompatActivity
         super.onResume();
         location=locationHandler.getCurrentLocation();
         locationHandler.startLocationUpdates(lcl);
-        flipper.setDisplayedChild(0);
-        setUpTab();
+        pageList.get(currentPage).startView();
+        flipper.setDisplayedChild(currentPage);
+        Log.i("Main","on resume");
     }
 
     @Override
     protected void onStop(){
         super.onStop();
         locationHandler.stopLocationUpdates();
+        pageList.get(currentPage).stopView();
+        Log.i("Main","on stop");
     }
 
     @Override
@@ -100,6 +91,8 @@ public class MainActivity extends AppCompatActivity
     public void onBackPressed() {
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
+        }else if(currentPage!=0){
+            changePage(0);
         }else if (System.currentTimeMillis()- currentBackPressedTime > BACK_PRESSED_INTERVAL) {
 
             currentBackPressedTime = System.currentTimeMillis();
@@ -134,10 +127,14 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch(item.getItemId()){
             case R.id.home:
-                flipper.setDisplayedChild(0);
+                changePage(0);
                 break;
             case R.id.mudan:
-                flipper.setDisplayedChild(1);
+                changePage(1);
+                break;
+            case R.id.map:
+                changePage(2);
+                pageList.get(2).onRefresh(location);
                 break;
 
         }
@@ -145,13 +142,18 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    private void setUpTab(){
+    private void setUpPageList(){
         pageList=new ArrayList<>();
-        pageList.add(new MainPagerOne(this));
-        pageList.add(new MainPagerTwo(this));
-        viewPager.setAdapter(new pagerAdapter());
-        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
-        viewPager.addOnPageChangeListener(opcl);
+        pageList.add(new MainFragmentHome(this,this));
+        pageList.add(new MainFragmentMudan(this,this));
+        pageList.add(new MainFragmentMap(this,this));
+    }
+
+    private void changePage(int page){
+        pageList.get(currentPage).stopView();
+        pageList.get(page).startView();
+        flipper.setDisplayedChild(page);
+        currentPage=page;
     }
 
     private LocationChangeListener lcl=new LocationChangeListener() {
@@ -160,44 +162,4 @@ public class MainActivity extends AppCompatActivity
             location=l;
         }
     };
-
-    private ViewPager.OnPageChangeListener opcl=new ViewPager.OnPageChangeListener() {
-        @Override
-        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-        }
-
-        @Override
-        public void onPageSelected(int position) {
-            currentTab=position;
-            pageList.get(position).onRefresh(location);
-        }
-
-        @Override
-        public void onPageScrollStateChanged(int state) {
-
-        }
-    };
-
-    private class pagerAdapter extends PagerAdapter {
-
-        @Override
-        public int getCount() {
-            return pageList.size();
-        }
-
-        @Override
-        public boolean isViewFromObject(View view, Object o) {
-            return o == view;
-        }
-
-        @Override
-        public Object instantiateItem(ViewGroup container, int position) {
-            container.addView(pageList.get(position));
-            return pageList.get(position);
-        }
-        @Override
-        public void destroyItem(ViewGroup container, int position, Object object) {
-            container.removeView((View) object);
-        }
-    }
 }

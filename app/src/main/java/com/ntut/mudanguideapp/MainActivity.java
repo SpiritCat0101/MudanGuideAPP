@@ -132,14 +132,16 @@ public class MainActivity extends AppCompatActivity
             case R.id.mudan:
                 changePage(1);
                 break;
-            case R.id.map:
-                changePage(2);
-                pageList.get(2).onRefresh(location);
-                break;
             case R.id.sight:
-                changePage(3);
+                changePage(2);
                 break;
-
+            case R.id.map:
+                changePage(3);
+                pageList.get(3).onRefresh(location);
+                break;
+            case R.id.about:
+                changePage(4);
+                break;
         }
         drawer.closeDrawer(GravityCompat.START);
         return true;
@@ -149,8 +151,9 @@ public class MainActivity extends AppCompatActivity
         pageList=new ArrayList<>();
         pageList.add(new MainFragmentHome(this,this));
         pageList.add(new MainFragmentMudan(this,this));
-        pageList.add(new MainFragmentMap(this,this));
         pageList.add(new MainFragmentSight(this,this));
+        pageList.add(new MainFragmentMap(this,this));
+        pageList.add(new MainFragmentAbout(this));
     }
 
     private void changePage(int page){

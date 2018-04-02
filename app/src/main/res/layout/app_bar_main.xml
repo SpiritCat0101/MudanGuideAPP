@@ -40,13 +40,16 @@
                 layout="@layout/main_fragment_mudan" />
 
             <include
+                android:id="@+id/include_sight"
+                layout="@layout/main_fragment_sight" />
+
+            <include
                 android:id="@+id/include_map"
                 layout="@layout/main_fragment_map" />
 
             <include
-                android:id="@+id/include_sight"
-                layout="@layout/main_fragment_sight" />
-
+                android:id="@+id/include_about"
+                layout="@layout/main_fragment_about" />
 
         </ViewFlipper>
     </LinearLayout>

@@ -57,7 +57,7 @@ public class MainFragmentMap extends PagerActive {
                 mMap.setMyLocationEnabled(true);
             }
             mMap.moveCamera(CameraUpdateFactory
-                    .newLatLngZoom(new LatLng(22.174263,120.791608),14));
+                    .newLatLngZoom(new LatLng(22.174263,120.791608),(float) 12.5));
         }
     };
 }

@@ -13,8 +13,7 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainFragmentMudan extends PagerActive{
-
+public class MainFragmentSight extends PagerActive {
     private Context context;
     private Activity activity;
 
@@ -23,21 +22,23 @@ public class MainFragmentMudan extends PagerActive{
     private List<PagerView> pageList;
     private int currentTab=0;
 
-    public MainFragmentMudan(Context c, Activity a){
+    public MainFragmentSight(Context c, Activity a){
         super(c);
         context=c;
         activity=a;
-        tabLayout=activity.findViewById(R.id.main_tabs);
-        viewPager=activity.findViewById(R.id.main_pager);
+        tabLayout=activity.findViewById(R.id.sight_tabs);
+        viewPager=activity.findViewById(R.id.sight_pager);
         setUpTab();
     }
 
     @Override
     public void startView(){
+
     }
 
     @Override
     public void stopView(){
+
     }
 
     @Override
@@ -45,10 +46,15 @@ public class MainFragmentMudan extends PagerActive{
 
     }
 
+
     private void setUpTab(){
         pageList=new ArrayList<>();
-        pageList.add(new MainPagerOne(context));
-        pageList.add(new MainPagerTwo(context));
+        pageList.add(new SightPager(context,0));
+        pageList.add(new SightPager(context,1));
+        pageList.add(new SightPager(context,2));
+        pageList.add(new SightPager(context,3));
+        pageList.add(new SightPager(context,4));
+        pageList.add(new SightPager(context,5));
         viewPager.setAdapter(new pagerAdapter());
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(viewPager));

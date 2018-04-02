@@ -43,6 +43,10 @@
                 android:id="@+id/include_map"
                 layout="@layout/main_fragment_map" />
 
+            <include
+                android:id="@+id/include_sight"
+                layout="@layout/main_fragment_sight" />
+
 
         </ViewFlipper>
     </LinearLayout>

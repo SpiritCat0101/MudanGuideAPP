@@ -13,4 +13,11 @@
     <string name="drawer_map_string">地圖</string>
     <string name="drawer_promote_string">推薦行程</string>
     <string name="drawer_about_string">關於我們</string>
+
+    <string name="village_sedraki_string">四海村</string>
+    <string name="village_kuskus_string">高士村</string>
+    <string name="village_macaren_string">旭海村</string>
+    <string name="village_maljipa_string">東源村</string>
+    <string name="village_tjaqaciljai_string">石門村</string>
+    <string name="village_sinvaudjan_string">牡丹村</string>
 </resources>

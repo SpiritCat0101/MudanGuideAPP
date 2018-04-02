@@ -136,6 +136,9 @@ public class MainActivity extends AppCompatActivity
                 changePage(2);
                 pageList.get(2).onRefresh(location);
                 break;
+            case R.id.sight:
+                changePage(3);
+                break;
 
         }
         drawer.closeDrawer(GravityCompat.START);
@@ -147,6 +150,7 @@ public class MainActivity extends AppCompatActivity
         pageList.add(new MainFragmentHome(this,this));
         pageList.add(new MainFragmentMudan(this,this));
         pageList.add(new MainFragmentMap(this,this));
+        pageList.add(new MainFragmentSight(this,this));
     }
 
     private void changePage(int page){

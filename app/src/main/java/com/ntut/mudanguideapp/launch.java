@@ -10,6 +10,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.ntut.mudanguideapp.Database.InfoDatabase;
+
+import java.io.IOException;
+
 public class launch extends AppCompatActivity {
     private static final int  REQUEST = 1;
 
@@ -20,10 +24,18 @@ public class launch extends AppCompatActivity {
 
     boolean check_permission=true;
 
+    private InfoDatabase infoDatabase;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_launch);
+        infoDatabase=new InfoDatabase(this);
+        try{
+            infoDatabase.CopyDB();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
     }
 
     @Override

@@ -1,69 +1,64 @@
 package com.ntut.mudanguideapp;
 
+import android.app.Activity;
 import android.content.Context;
 import android.database.Cursor;
 import android.location.Location;
-import android.view.LayoutInflater;
-import android.view.View;
+import android.util.Log;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
-import android.widget.TextView;
 
 import com.ntut.mudanguideapp.Database.InfoDatabase;
 
+import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class SightPager extends PagerView {
+public class MainFragmentSearchResult extends PagerActive {
     private Context context;
+    private Activity activity;
 
     private InfoDatabase infoDatabase;
-
-    private static final String[] villageName={
-            "牡丹村",
-            "石門村",
-            "東源村",
-            "旭海村",
-            "高士村",
-            "四海村"
-    };
-
-    private static final String[] villageCat={
-            "SI",
-            "TJ",
-            "MAL",
-            "MAC",
-            "KU",
-            "SE"
-    };
 
     private ListView listView;
     private String[] from={"main","sub"};
     private int[] to={android.R.id.text1,android.R.id.text2};
 
-    public SightPager(Context c,int page) {
+    public MainFragmentSearchResult(Context c, Activity a){
         super(c);
         context=c;
+        activity=a;
+
+        listView=activity.findViewById(R.id.searchList);
+
         infoDatabase=new InfoDatabase(context);
-        View view = LayoutInflater.from(c).inflate(R.layout.pager_sight, null);
-        listView=view.findViewById(R.id.sightList);
-        setUpList(page);
-        addView(view);
     }
 
     @Override
-    public void onRefresh(Location location){
+    public void startView(){
+
     }
 
-    private void setUpList(int page){
+    @Override
+    public void stopView(){
+
+    }
+
+    @Override
+    public void onRefresh(String str){
+        setUpList(str);
+    }
+
+    private void setUpList(String search){
         Cursor cu;
-        String query="village = '"+villageCat[page]+"'";
+        String query="name LIKE '"+search+"%' or content LIKE '%"+search+"%'";
 
         infoDatabase.OpenDB();
         cu=infoDatabase.getCursor(query,null);
         cu.moveToFirst();
 
         ArrayList<HashMap<String,String>> arrayList=new ArrayList<>();
+        Log.i("SearchResult",String.valueOf(cu.getCount()));
         for(int i=0;i<cu.getCount();i++){
             HashMap<String,String> hashMap=new HashMap<>();
             hashMap.put("main",cu.getString(1));

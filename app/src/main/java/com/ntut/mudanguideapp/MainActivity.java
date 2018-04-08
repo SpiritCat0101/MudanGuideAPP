@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
+import com.miguelcatalan.materialsearchview.MaterialSearchView;
 import com.ntut.mudanguideapp.location.LocationChangeListener;
 import com.ntut.mudanguideapp.location.LocationHandler;
 
@@ -37,6 +38,8 @@ public class MainActivity extends AppCompatActivity
 
     private DrawerLayout drawer;
 
+    private MaterialSearchView searchView;
+
     private LocationHandler locationHandler;
     private Location location;
     @Override
@@ -57,6 +60,11 @@ public class MainActivity extends AppCompatActivity
 
         flipper=findViewById(R.id.main_flipper);
         setUpPageList();
+
+        searchView=findViewById(R.id.search_bar);
+        searchView.closeSearch();
+        searchView.setOnQueryTextListener(oqtl);
+        searchView.setOnSearchViewListener(svl);
 
         locationHandler=new LocationHandler(this,this);
     }
@@ -91,7 +99,9 @@ public class MainActivity extends AppCompatActivity
     public void onBackPressed() {
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        }else if(currentPage!=0){
+        }else if(searchView.isSearchOpen()) {
+            searchView.closeSearch();
+        }else if (currentPage!=0) {
             changePage(0);
         }else if (System.currentTimeMillis()- currentBackPressedTime > BACK_PRESSED_INTERVAL) {
 
@@ -103,21 +113,19 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-
+    @SuppressWarnings("NullPointerException")
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
+        MenuItem item=menu.findItem(R.id.action_search);
+        searchView.setMenuItem(item);
         return true;
     }
 
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -129,18 +137,20 @@ public class MainActivity extends AppCompatActivity
             case R.id.home:
                 changePage(0);
                 break;
-            case R.id.mudan:
+            case R.id.map:
                 changePage(1);
                 break;
-            case R.id.sight:
+            case R.id.local:
                 changePage(2);
                 break;
-            case R.id.map:
+            case R.id.sight:
                 changePage(3);
-                pageList.get(3).onRefresh(location);
+                break;
+            case R.id.like:
+                changePage(4);
                 break;
             case R.id.about:
-                changePage(4);
+                changePage(5);
                 break;
         }
         drawer.closeDrawer(GravityCompat.START);
@@ -150,10 +160,12 @@ public class MainActivity extends AppCompatActivity
     private void setUpPageList(){
         pageList=new ArrayList<>();
         pageList.add(new MainFragmentHome(this,this));
-        pageList.add(new MainFragmentMudan(this,this));
-        pageList.add(new MainFragmentSight(this,this));
         pageList.add(new MainFragmentMap(this,this));
+        pageList.add(new MainFragmentLocal(this,this));
+        pageList.add(new MainFragmentSight(this,this));
+        pageList.add(new MainFragmentLike(this,this));
         pageList.add(new MainFragmentAbout(this));
+        pageList.add(new MainFragmentSearchResult(this,this));
     }
 
     private void changePage(int page){
@@ -167,6 +179,41 @@ public class MainActivity extends AppCompatActivity
         @Override
         public void onLocationChange(Location l) {
             location=l;
+        }
+    };
+
+    private MaterialSearchView.OnQueryTextListener oqtl= new MaterialSearchView.OnQueryTextListener() {
+        @Override
+        public boolean onQueryTextSubmit(String query) {
+            if(currentPage==6){
+                pageList.get(6).onRefresh(query);
+            }
+            Log.i("Main","query="+query);
+            return false;
+        }
+
+        @Override
+        public boolean onQueryTextChange(String newText) {
+            if(currentPage==6 && searchView.isSearchOpen()){
+                pageList.get(6).onRefresh(newText);
+            }
+            Log.i("Main","newText="+newText);
+            return false;
+        }
+    };
+
+    private MaterialSearchView.SearchViewListener svl=new MaterialSearchView.SearchViewListener() {
+        int previousPage;
+        @Override
+        public void onSearchViewShown() {
+            previousPage=currentPage;
+            changePage(6);
+            Log.i("Main","SearchViewShown");
+        }
+
+        @Override
+        public void onSearchViewClosed() {
+            Log.i("Main","SearchViewClosed");
         }
     };
 }

@@ -9,6 +9,7 @@ import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +29,7 @@ public class MainFragmentSight extends PagerActive {
         activity=a;
         tabLayout=activity.findViewById(R.id.sight_tabs);
         viewPager=activity.findViewById(R.id.sight_pager);
+
         setUpTab();
     }
 
@@ -42,10 +44,9 @@ public class MainFragmentSight extends PagerActive {
     }
 
     @Override
-    public void onRefresh(Location location){
+    public void onRefresh(String str){
 
     }
-
 
     private void setUpTab(){
         pageList=new ArrayList<>();

@@ -8,5 +8,5 @@ public abstract class PagerActive extends ConstraintLayout {
    public PagerActive (Context context){super(context);}
    public abstract void startView();
    public abstract void stopView();
-   public abstract void onRefresh(Location location);
+   public abstract void onRefresh(String str);
 }

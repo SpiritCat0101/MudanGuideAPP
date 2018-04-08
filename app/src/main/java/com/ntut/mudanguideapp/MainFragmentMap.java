@@ -42,7 +42,7 @@ public class MainFragmentMap extends PagerActive {
     }
 
     @Override
-    public void onRefresh(Location location){
+    public void onRefresh(String str){
     }
 
     private OnMapReadyCallback omrc=new OnMapReadyCallback() {

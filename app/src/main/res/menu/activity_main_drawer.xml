@@ -6,18 +6,18 @@
         android:id="@+id/group_home">
         <item android:id="@+id/home"
             android:title="@string/drawer_home_string"/>
+        <item android:id="@+id/map"
+            android:title="@string/drawer_map_string"/>
     </group>
 
     <group android:checkableBehavior="single"
         android:id="@+id/group_info">
-        <item android:id="@+id/mudan"
-            android:title="@string/drawer_mudan_string"/>
+        <item android:id="@+id/local"
+            android:title="@string/drawer_local_string"/>
         <item android:id="@+id/sight"
             android:title="@string/drawer_sight_string"/>
-        <item android:id="@+id/map"
-            android:title="@string/drawer_map_string"/>
-        <item android:id="@+id/promote"
-            android:title="@string/drawer_promote_string"/>
+        <item android:id="@+id/like"
+            android:title="@string/drawer_like_string"/>
     </group>
 
     <group android:checkableBehavior="single"

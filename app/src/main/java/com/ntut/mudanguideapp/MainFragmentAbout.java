@@ -22,6 +22,6 @@ public class MainFragmentAbout extends PagerActive {
     }
 
     @Override
-    public void onRefresh(Location location){
+    public void onRefresh(String str){
     }
 }

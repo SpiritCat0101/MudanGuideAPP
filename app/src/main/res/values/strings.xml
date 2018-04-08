@@ -8,16 +8,18 @@
     <string name="action_settings">Settings</string>
 
     <string name="drawer_home_string">主頁</string>
-    <string name="drawer_mudan_string">認識牡丹</string>
+    <string name="drawer_local_string">地方資訊</string>
     <string name="drawer_sight_string">旅遊景點</string>
     <string name="drawer_map_string">地圖</string>
-    <string name="drawer_promote_string">推薦行程</string>
+    <string name="drawer_like_string">我的收藏</string>
     <string name="drawer_about_string">關於我們</string>
 
-    <string name="village_sedraki_string">四海村</string>
-    <string name="village_kuskus_string">高士村</string>
-    <string name="village_macaren_string">旭海村</string>
-    <string name="village_maljipa_string">東源村</string>
-    <string name="village_tjaqaciljai_string">石門村</string>
     <string name="village_sinvaudjan_string">牡丹村</string>
+    <string name="village_tjaqaciljai_string">石門村</string>
+    <string name="village_maljipa_string">東源村</string>
+    <string name="village_macaren_string">旭海村</string>
+    <string name="village_kuskus_string">高士村</string>
+    <string name="village_sedraki_string">四海村</string>
+
+    <string name="search_hint_string">搜尋景點...</string>
 </resources>

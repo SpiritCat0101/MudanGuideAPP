@@ -69,49 +69,17 @@ public class SightPager extends PagerView {
         ArrayList<HashMap<String,String>> arrayList=new ArrayList<>();
         for(int i=0;i<cu.getCount();i++){
             HashMap<String,String> hashMap=new HashMap<>();
-            hashMap.put("name",cu.getString(1));
+            hashMap.put(from[0],cu.getString(1));
             arrayList.add(hashMap);
             cu.moveToNext();
         }
 
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter(arrayList);
+        RecyclerViewAdapter adapter = new RecyclerViewAdapter(arrayList,from);
         listView.setHasFixedSize(true);
         listView.setAdapter(adapter);
         LinearLayoutManager llm = new LinearLayoutManager(context);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         listView.setLayoutManager(llm);
         infoDatabase.CloseDB();
-    }
-
-    public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder> {
-        public ArrayList<HashMap<String,String>> myValues;
-
-        public RecyclerViewAdapter (ArrayList<HashMap<String,String>> myValues){
-            this.myValues= myValues;
-        }
-
-        @Override
-        public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View listItem = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_modual, parent, false);
-            return new MyViewHolder(listItem);
-        }
-
-        @Override
-        public void onBindViewHolder(MyViewHolder holder, int position) {
-            holder.nameText.setText(myValues.get(position).get(from[0]));
-        }
-
-        @Override
-        public int getItemCount() {
-            return myValues.size();
-        }
-
-        public class MyViewHolder extends RecyclerView.ViewHolder {
-            private TextView nameText;
-            public MyViewHolder(View itemView) {
-                super(itemView);
-                nameText = itemView.findViewById(R.id.nameText);
-            }
-        }
     }
 }

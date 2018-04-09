@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.database.Cursor;
 import android.location.Location;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -22,9 +24,8 @@ public class MainFragmentSearchResult extends PagerActive {
 
     private InfoDatabase infoDatabase;
 
-    private ListView listView;
-    private String[] from={"main","sub"};
-    private int[] to={android.R.id.text1,android.R.id.text2};
+    private RecyclerView listView;
+    private String[] from={"name"};
 
     public MainFragmentSearchResult(Context c, Activity a){
         super(c);
@@ -66,13 +67,16 @@ public class MainFragmentSearchResult extends PagerActive {
         Log.i("SearchResult",String.valueOf(cu.getCount()));
         for(int i=0;i<cu.getCount();i++){
             HashMap<String,String> hashMap=new HashMap<>();
-            hashMap.put("main",cu.getString(1));
-            hashMap.put("sub",cu.getString(2));
+            hashMap.put(from[0],cu.getString(1));
             arrayList.add(hashMap);
             cu.moveToNext();
         }
-        SimpleAdapter adapter=new SimpleAdapter(context,arrayList,android.R.layout.simple_list_item_2,from,to);
+        RecyclerViewAdapter adapter = new RecyclerViewAdapter(arrayList,from);
+        listView.setHasFixedSize(true);
         listView.setAdapter(adapter);
+        LinearLayoutManager llm = new LinearLayoutManager(context);
+        llm.setOrientation(LinearLayoutManager.VERTICAL);
+        listView.setLayoutManager(llm);
         infoDatabase.CloseDB();
     }
 }

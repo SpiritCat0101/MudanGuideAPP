@@ -13,7 +13,6 @@
         android:layout_height="144dp"
         android:orientation="vertical">
 
-
         <ImageView
             android:id="@+id/previewImage"
             android:layout_width="match_parent"
@@ -47,7 +46,7 @@
                 android:layout_height="22dp"
                 android:layout_alignParentTop="true"
                 android:layout_toStartOf="@+id/mapText"
-                app:srcCompat="@drawable/ic_suggestion" />
+                app:srcCompat="@mipmap/ic_map_black_36dp" />
 
             <TextView
                 android:id="@+id/mapText"
@@ -66,7 +65,7 @@
                 android:layout_height="22dp"
                 android:layout_alignParentTop="true"
                 android:layout_toStartOf="@+id/likeText"
-                app:srcCompat="@drawable/ic_suggestion" />
+                app:srcCompat="@mipmap/ic_star_border_black_36dp" />
 
             <TextView
                 android:id="@+id/likeText"

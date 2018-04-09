@@ -5,24 +5,30 @@
     <group android:checkableBehavior="single"
         android:id="@+id/group_home">
         <item android:id="@+id/home"
+            android:icon="@mipmap/ic_home_black_36dp"
             android:title="@string/drawer_home_string"/>
         <item android:id="@+id/map"
+            android:icon="@mipmap/ic_map_black_36dp"
             android:title="@string/drawer_map_string"/>
     </group>
 
     <group android:checkableBehavior="single"
         android:id="@+id/group_info">
         <item android:id="@+id/local"
+            android:icon="@mipmap/ic_info_black_36dp"
             android:title="@string/drawer_local_string"/>
         <item android:id="@+id/sight"
+            android:icon="@mipmap/ic_location_on_black_36dp"
             android:title="@string/drawer_sight_string"/>
         <item android:id="@+id/like"
+            android:icon="@mipmap/ic_star_black_36dp"
             android:title="@string/drawer_like_string"/>
     </group>
 
     <group android:checkableBehavior="single"
         android:id="@+id/group_about">
         <item android:id="@+id/about"
+            android:icon="@mipmap/ic_forum_black_36dp"
             android:title="@string/drawer_about_string"/>
     </group>
 </menu>

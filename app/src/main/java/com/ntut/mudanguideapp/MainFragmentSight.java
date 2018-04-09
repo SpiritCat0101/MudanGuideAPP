@@ -44,7 +44,7 @@ public class MainFragmentSight extends PagerActive {
     }
 
     @Override
-    public void onRefresh(String str){
+    public void onRefresh(Object obj){
 
     }
 

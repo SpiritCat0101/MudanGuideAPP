@@ -187,6 +187,7 @@ public class MainActivity extends AppCompatActivity
         public boolean onQueryTextSubmit(String query) {
             if(currentPage==6){
                 pageList.get(6).onRefresh(query);
+                pageList.get(6).stopView();
             }
             Log.i("Main","query="+query);
             return false;

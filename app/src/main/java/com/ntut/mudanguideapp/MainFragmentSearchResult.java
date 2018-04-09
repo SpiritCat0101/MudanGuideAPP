@@ -18,6 +18,8 @@ public class MainFragmentSearchResult extends PagerActive {
     private Context context;
     private Activity activity;
 
+    private boolean isShow;
+
     private InfoDatabase infoDatabase;
 
     private ListView listView;
@@ -36,17 +38,20 @@ public class MainFragmentSearchResult extends PagerActive {
 
     @Override
     public void startView(){
-
+        isShow=true;
     }
 
     @Override
     public void stopView(){
-
+        isShow=false;
     }
 
     @Override
-    public void onRefresh(String str){
-        setUpList(str);
+    public void onRefresh(Object obj){
+        if(isShow){
+            String search=(String) obj;
+            setUpList(search);
+        }
     }
 
     private void setUpList(String search){

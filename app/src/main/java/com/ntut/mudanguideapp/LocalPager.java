@@ -1,71 +1,56 @@
 package com.ntut.mudanguideapp;
 
-import android.app.Activity;
 import android.content.Context;
 import android.database.Cursor;
-import android.location.Location;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.widget.ListView;
-import android.widget.SimpleAdapter;
+import android.view.LayoutInflater;
+import android.view.View;
 
 import com.ntut.mudanguideapp.Database.InfoDatabase;
 import com.ntut.mudanguideapp.RecyclerView.RecyclerViewAdapter;
 
-import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class MainFragmentSearchResult extends PagerActive {
+public class LocalPager extends PagerView {
     private Context context;
-    private Activity activity;
-
-    private boolean isShow;
 
     private InfoDatabase infoDatabase;
+
+    private String[] localCat={
+            "H",
+            "D",
+            "C",
+            "E"
+    };
 
     private RecyclerView listView;
     private String[] from={"_id","name","isLike"};
 
-    public MainFragmentSearchResult(Context c, Activity a){
+    LocalPager(Context c, int page){
         super(c);
         context=c;
-        activity=a;
-
-        listView=activity.findViewById(R.id.searchList);
-
         infoDatabase=new InfoDatabase(context);
+        View view = LayoutInflater.from(c).inflate(R.layout.pager_local, null);
+        listView=view.findViewById(R.id.localList);
+
+        setUpList(page);
+        addView(view);
     }
 
     @Override
-    public void startView(){
-        isShow=true;
-    }
+    public void onRefresh(Object obj) { }
 
-    @Override
-    public void stopView(){
-        isShow=false;
-    }
-
-    @Override
-    public void onRefresh(Object obj){
-        if(isShow){
-            String search=(String) obj;
-            setUpList(search);
-        }
-    }
-
-    private void setUpList(String search){
+    private void setUpList(int page){
         Cursor cu;
-        String query="name LIKE '"+search+"%' or content LIKE '%"+search+"%'";
+        String query="village = '"+localCat[page]+"'";
 
         infoDatabase.OpenDB();
         cu=infoDatabase.getCursor(query,null);
         cu.moveToFirst();
 
         ArrayList<HashMap<String,Object>> arrayList=new ArrayList<>();
-        Log.i("SearchResult",String.valueOf(cu.getCount()));
         for(int i=0;i<cu.getCount();i++){
             HashMap<String,Object> hashMap=new HashMap<>();
             hashMap.put(from[0],cu.getString(1));
@@ -73,7 +58,8 @@ public class MainFragmentSearchResult extends PagerActive {
             arrayList.add(hashMap);
             cu.moveToNext();
         }
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter(context, arrayList,from);
+
+        RecyclerViewAdapter adapter = new RecyclerViewAdapter(context,arrayList,from);
         listView.setHasFixedSize(true);
         listView.setAdapter(adapter);
         LinearLayoutManager llm = new LinearLayoutManager(context);

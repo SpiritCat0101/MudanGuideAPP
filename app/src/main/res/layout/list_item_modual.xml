@@ -56,7 +56,7 @@
                 android:layout_marginEnd="8dp"
                 android:layout_toStartOf="@+id/likeImage"
                 android:text="前往"
-                android:textColor="#7d6d64"
+                android:textColor="@color/colorText"
                 android:textSize="16sp" />
 
             <ImageView
@@ -65,6 +65,7 @@
                 android:layout_height="22dp"
                 android:layout_alignParentTop="true"
                 android:layout_toStartOf="@+id/likeText"
+                android:tint="@color/colorLike"
                 app:srcCompat="@mipmap/ic_star_border_black_36dp" />
 
             <TextView
@@ -75,7 +76,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginEnd="16dp"
                 android:text="收藏"
-                android:textColor="#7d6d64"
+                android:textColor="@color/colorText"
                 android:textSize="16sp" />
         </RelativeLayout>
     </LinearLayout>

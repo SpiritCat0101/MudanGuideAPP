@@ -8,4 +8,6 @@
     <color name="black_semi_transparent">#2F000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="list_background">#f4f4f4</color>
+    <color name="colorLike">#c7cd06</color>
+    <color name="colorText">#7d6d64</color>
 </resources>

@@ -2,17 +2,13 @@ package com.ntut.mudanguideapp;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.location.Location;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ListView;
-import android.widget.SimpleAdapter;
-import android.widget.TextView;
 
 import com.ntut.mudanguideapp.Database.InfoDatabase;
+import com.ntut.mudanguideapp.RecyclerView.RecyclerViewAdapter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -41,7 +37,7 @@ public class SightPager extends PagerView {
     };
 
     private RecyclerView listView;
-    private String[] from={"name"};
+    private String[] from={"_id","name","isLike"};
 
     public SightPager(Context c,int page) {
         super(c);
@@ -55,7 +51,8 @@ public class SightPager extends PagerView {
     }
 
     @Override
-    public void onRefresh(Location location){
+    public void onRefresh(Object obj){
+
     }
 
     private void setUpList(int page){
@@ -65,16 +62,16 @@ public class SightPager extends PagerView {
         infoDatabase.OpenDB();
         cu=infoDatabase.getCursor(query,null);
         cu.moveToFirst();
-
-        ArrayList<HashMap<String,String>> arrayList=new ArrayList<>();
+        ArrayList<HashMap<String,Object>> arrayList=new ArrayList<>();
         for(int i=0;i<cu.getCount();i++){
-            HashMap<String,String> hashMap=new HashMap<>();
+            HashMap<String,Object> hashMap=new HashMap<>();
             hashMap.put(from[0],cu.getString(1));
+            hashMap.put(from[1],cu.getInt(5));
             arrayList.add(hashMap);
             cu.moveToNext();
         }
 
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter(arrayList,from);
+        RecyclerViewAdapter adapter = new RecyclerViewAdapter(context,arrayList,from);
         listView.setHasFixedSize(true);
         listView.setAdapter(adapter);
         LinearLayoutManager llm = new LinearLayoutManager(context);

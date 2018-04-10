@@ -12,6 +12,7 @@ import android.widget.SimpleAdapter;
 
 import com.ntut.mudanguideapp.Database.InfoDatabase;
 import com.ntut.mudanguideapp.RecyclerView.RecyclerViewAdapter;
+import com.ntut.mudanguideapp.RecyclerView.RecyclerViewHandler;
 
 import java.io.StringReader;
 import java.util.ArrayList;
@@ -26,7 +27,7 @@ public class MainFragmentSearchResult extends PagerActive {
     private InfoDatabase infoDatabase;
 
     private RecyclerView listView;
-    private String[] from={"_id","name","isLike"};
+    private RecyclerViewHandler handler;
 
     public MainFragmentSearchResult(Context c, Activity a){
         super(c);
@@ -57,28 +58,8 @@ public class MainFragmentSearchResult extends PagerActive {
     }
 
     private void setUpList(String search){
-        Cursor cu;
         String query="name LIKE '"+search+"%' or content LIKE '%"+search+"%'";
 
-        infoDatabase.OpenDB();
-        cu=infoDatabase.getCursor(query,null);
-        cu.moveToFirst();
-
-        ArrayList<HashMap<String,Object>> arrayList=new ArrayList<>();
-        Log.i("SearchResult",String.valueOf(cu.getCount()));
-        for(int i=0;i<cu.getCount();i++){
-            HashMap<String,Object> hashMap=new HashMap<>();
-            hashMap.put(from[0],cu.getString(1));
-            hashMap.put(from[1],cu.getInt(5));
-            arrayList.add(hashMap);
-            cu.moveToNext();
-        }
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter(context, arrayList,from);
-        listView.setHasFixedSize(true);
-        listView.setAdapter(adapter);
-        LinearLayoutManager llm = new LinearLayoutManager(context);
-        llm.setOrientation(LinearLayoutManager.VERTICAL);
-        listView.setLayoutManager(llm);
-        infoDatabase.CloseDB();
+        handler=new RecyclerViewHandler(context,listView,query);
     }
 }

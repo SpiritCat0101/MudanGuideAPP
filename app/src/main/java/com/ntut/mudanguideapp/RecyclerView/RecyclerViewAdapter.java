@@ -2,6 +2,8 @@ package com.ntut.mudanguideapp.RecyclerView;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,14 +23,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     private RecyclerUpdateListener listener;
 
-    private ArrayList<HashMap<String,Object>> myValues;
-    private String[] from;
+    private ArrayList<SparseArray<Object>> myValues;
 
-    public RecyclerViewAdapter (Context c,ArrayList<HashMap<String,Object>> myValues, String[] from){
+    RecyclerViewAdapter (Context c,ArrayList<SparseArray<Object>> myValues,RecyclerUpdateListener l){
         this.myValues= myValues;
-        this.from=from;
         this.context=c;
         this.infoDatabase=new InfoDatabase(context);
+        this.listener=l;
     }
 
     @Override
@@ -38,20 +39,30 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     @Override
-    public void onBindViewHolder(RecyclerViewAdapter.MyViewHolder holder, int position) {
-        infoDatabase.OpenDB();
-        holder.nameText.setText((String)myValues.get(position).get(from[0]));
-        if((int)myValues.get(position).get(from[1]) == 1){
+    public void onBindViewHolder(final RecyclerViewAdapter.MyViewHolder holder, final int pos) {
+        final int _id=(int) myValues.get(pos).get(0);
+        final String name=(String) myValues.get(pos).get(1);
+        final String content=(String) myValues.get(pos).get(2);
+        final double Lat=(double) myValues.get(pos).get(3);
+        final double Lng=(double) myValues.get(pos).get(4);
+        final int isLike=(int) myValues.get(pos).get(5);
+        final String village=(String) myValues.get(pos).get(6);
+
+        holder.nameText.setText(name);
+        if(isLike == 1){
             holder.likeIcon.setImageResource(R.mipmap.ic_star_black_36dp);
+        }else{
+            holder.likeIcon.setImageResource(R.mipmap.ic_star_border_black_36dp);
         }
         holder.likeIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //infoDatabase.updateDB();
+                infoDatabase.OpenDB();
+                infoDatabase.updateDB(_id,name,content,Lat,Lng,(isLike+1)%2,village);
+                infoDatabase.CloseDB();
                 listener.onUpdate();
             }
         });
-        infoDatabase.CloseDB();
     }
 
     @Override

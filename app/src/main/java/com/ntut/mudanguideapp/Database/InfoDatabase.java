@@ -88,7 +88,7 @@ public class InfoDatabase {
         cv.put(DB_menu[5],isLike);
         cv.put(DB_menu[6],village);
 
-        myDataBase.update(Table_name,cv,"id = "+Integer.toString(_id),null);
+        myDataBase.update(Table_name,cv,"_id = "+Integer.toString(_id),null);
         Log.i("InfoDatabase","update success");
     }
 }

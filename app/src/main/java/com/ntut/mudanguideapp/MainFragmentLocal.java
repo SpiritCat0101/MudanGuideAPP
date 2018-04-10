@@ -34,7 +34,7 @@ public class MainFragmentLocal extends PagerActive {
 
     @Override
     public void startView(){
-
+        pageList.get(currentTab).onRefresh(null);
     }
 
     @Override
@@ -68,6 +68,7 @@ public class MainFragmentLocal extends PagerActive {
         @Override
         public void onPageSelected(int position) {
             currentTab=position;
+            pageList.get(currentTab).onRefresh(null);
         }
 
         @Override

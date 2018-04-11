@@ -67,15 +67,15 @@ public class RecyclerViewHandler {
         cu.moveToFirst();
         arrayList=new ArrayList<>();
         for(int i=0;i<cu.getCount();i++){
-            SparseArray<Object> hashMap=new SparseArray<>();
-            hashMap.append(0,cu.getInt(0));
-            hashMap.append(1,cu.getString(1));
-            hashMap.append(2,cu.getString(2));
-            hashMap.append(3,cu.getDouble(3));
-            hashMap.append(4,cu.getDouble(4));
-            hashMap.append(5,cu.getInt(5));
-            hashMap.append(6,cu.getString(6));
-            arrayList.add(hashMap);
+            SparseArray<Object> sparseArray=new SparseArray<>();
+            sparseArray.append(0,cu.getInt(0));
+            sparseArray.append(1,cu.getString(1));
+            sparseArray.append(2,cu.getString(2));
+            sparseArray.append(3,cu.getDouble(3));
+            sparseArray.append(4,cu.getDouble(4));
+            sparseArray.append(5,cu.getInt(5));
+            sparseArray.append(6,cu.getString(6));
+            arrayList.add(sparseArray);
             cu.moveToNext();
         }
         adapter = new RecyclerViewAdapter(context,arrayList,rul);

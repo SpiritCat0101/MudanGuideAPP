@@ -1,6 +1,7 @@
 package com.ntut.mudanguideapp.RecyclerView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.util.SparseArray;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 
 import com.ntut.mudanguideapp.Database.InfoDatabase;
 import com.ntut.mudanguideapp.R;
+import com.ntut.mudanguideapp.launch;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -48,13 +50,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         final int isLike=(int) myValues.get(pos).get(5);
         final String village=(String) myValues.get(pos).get(6);
 
-        holder.nameText.setText(name);
-        if(isLike == 1){
-            holder.likeIcon.setImageResource(R.mipmap.ic_star_black_36dp);
-        }else{
-            holder.likeIcon.setImageResource(R.mipmap.ic_star_border_black_36dp);
-        }
-        holder.likeIcon.setOnClickListener(new View.OnClickListener() {
+        View.OnClickListener likeClick=new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 infoDatabase.OpenDB();
@@ -62,7 +58,36 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 infoDatabase.CloseDB();
                 listener.onUpdate();
             }
-        });
+        };
+
+        View.OnClickListener contentClick=new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i("RecycleAdapter","content id = "+String.valueOf(_id));
+            }
+        };
+
+        View.OnClickListener mapClick=new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i("RecycleAdapter","map click");
+            }
+        };
+
+        holder.nameText.setText(name);
+        holder.nameText.setOnClickListener(contentClick);
+
+        holder.previewImage.setOnClickListener(contentClick);
+        if(isLike == 1){
+            holder.likeIcon.setImageResource(R.mipmap.ic_star_black_36dp);
+        }else{
+            holder.likeIcon.setImageResource(R.mipmap.ic_star_border_black_36dp);
+        }
+        holder.likeIcon.setOnClickListener(likeClick);
+        holder.likeText.setOnClickListener(likeClick);
+
+        holder.mapIcon.setOnClickListener(mapClick);
+        holder.mapText.setOnClickListener(mapClick);
     }
 
     @Override
@@ -72,11 +97,19 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     class MyViewHolder extends RecyclerView.ViewHolder {
         private TextView nameText;
+        private TextView likeText;
+        private TextView mapText;
+        private ImageView previewImage;
         private ImageView likeIcon;
+        private ImageView mapIcon;
         MyViewHolder(View itemView) {
             super(itemView);
             nameText = itemView.findViewById(R.id.nameText);
+            likeText = itemView.findViewById(R.id.likeText);
+            mapText = itemView.findViewById(R.id.mapText);
+            previewImage=itemView.findViewById(R.id.previewImage);
             likeIcon = itemView.findViewById(R.id.likeImage);
+            mapIcon = itemView.findViewById(R.id.mapImage);
         }
     }
 }

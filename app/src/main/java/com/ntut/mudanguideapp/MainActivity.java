@@ -1,5 +1,6 @@
 package com.ntut.mudanguideapp;
 
+import android.database.Cursor;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.Process;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
+import com.ntut.mudanguideapp.Database.InfoDatabase;
 import com.ntut.mudanguideapp.location.LocationChangeListener;
 import com.ntut.mudanguideapp.location.LocationHandler;
 
@@ -28,6 +30,8 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private static final int BACK_PRESSED_INTERVAL = 2000;
+
+    private InfoDatabase infoDatabase;
 
     private long currentBackPressedTime = 0;
 
@@ -41,7 +45,8 @@ public class MainActivity extends AppCompatActivity
     private MaterialSearchView searchView;
 
     private LocationHandler locationHandler;
-    private Location location;
+    private Location previousLocation;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +65,8 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        infoDatabase=new InfoDatabase(this);
+
         flipper=findViewById(R.id.main_flipper);
         setUpPageList();
 
@@ -69,12 +76,15 @@ public class MainActivity extends AppCompatActivity
         searchView.setOnSearchViewListener(svl);
 
         locationHandler=new LocationHandler(this,this);
+
+        previousLocation=new Location("previousLocation");
+        previousLocation.setLatitude(0);
+        previousLocation.setLongitude(0);
     }
 
     @Override
     protected void onResume(){
         super.onResume();
-        location=locationHandler.getCurrentLocation();
         locationHandler.startLocationUpdates(lcl);
         pageList.get(currentPage).startView();
         flipper.setDisplayedChild(currentPage);
@@ -159,6 +169,37 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+    private void updateDistance(Location currentLocation){
+        float distance=currentLocation.distanceTo(previousLocation);
+        Log.i("main",String.valueOf(distance));
+        if(distance>=500){
+            infoDatabase.OpenDB();
+            Cursor cu=infoDatabase.getCursor(null,null);
+            cu.moveToFirst();
+            while(!cu.isAfterLast()){
+                Location target=new Location("target");
+                target.setLatitude(cu.getDouble(3));
+                target.setLongitude(cu.getDouble(4));
+                float disTo=currentLocation.distanceTo(target);
+
+                infoDatabase.updateDB(
+                        cu.getInt(0),
+                        cu.getString(1),
+                        cu.getString(2),
+                        cu.getDouble(3),
+                        cu.getDouble(4),
+                        cu.getInt(5),
+                        cu.getString(6),
+                        disTo
+                );
+
+                cu.moveToNext();
+            }
+            previousLocation=currentLocation;
+            infoDatabase.CloseDB();
+        }
+    }
+
     private void setUpPageList(){
         pageList=new ArrayList<>();
         pageList.add(new MainFragmentHome(this,this));
@@ -166,7 +207,7 @@ public class MainActivity extends AppCompatActivity
         pageList.add(new MainFragmentLocal(this,this));
         pageList.add(new MainFragmentSight(this,this));
         pageList.add(new MainFragmentLike(this,this));
-        pageList.add(new MainFragmentAbout(this));
+        pageList.add(new MainFragmentAbout(this,this));
         pageList.add(new MainFragmentSearchResult(this,this));
     }
 
@@ -180,7 +221,7 @@ public class MainActivity extends AppCompatActivity
     private LocationChangeListener lcl=new LocationChangeListener() {
         @Override
         public void onLocationChange(Location l) {
-            location=l;
+            updateDistance(l);
         }
     };
 

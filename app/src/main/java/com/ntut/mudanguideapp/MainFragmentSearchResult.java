@@ -58,7 +58,7 @@ public class MainFragmentSearchResult extends PagerActive {
     }
 
     private void setUpList(String search){
-        String query="name LIKE '"+search+"%' or content LIKE '%"+search+"%'";
+        String query="name LIKE '"+search+"%' or content LIKE '%"+search+"%' ORDER BY distance ASC";
 
         handler=new RecyclerViewHandler(context,listView,query);
     }

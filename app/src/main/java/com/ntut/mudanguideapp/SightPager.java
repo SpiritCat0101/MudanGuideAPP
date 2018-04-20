@@ -18,8 +18,6 @@ import java.util.HashMap;
 public class SightPager extends PagerView {
     private Context context;
 
-    private InfoDatabase infoDatabase;
-
     private static final String[] villageName={
             "牡丹村",
             "石門村",
@@ -44,7 +42,6 @@ public class SightPager extends PagerView {
     public SightPager(Context c,int page) {
         super(c);
         context=c;
-        infoDatabase=new InfoDatabase(context);
         View view = LayoutInflater.from(c).inflate(R.layout.pager_sight, null);
         listView=view.findViewById(R.id.sightList);
 
@@ -58,7 +55,7 @@ public class SightPager extends PagerView {
     }
 
     private void setUpList(int page){
-        String query="village = '"+villageCat[page]+"'";
+        String query="village = '"+villageCat[page]+"' ORDER BY distance ASC";
 
         handler=new RecyclerViewHandler(context,listView,query);
     }

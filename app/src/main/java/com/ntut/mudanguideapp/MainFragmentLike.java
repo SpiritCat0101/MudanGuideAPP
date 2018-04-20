@@ -48,7 +48,7 @@ public class MainFragmentLike extends PagerActive{
     }
 
     private void setUpList(){
-        String query="isLike = 1";
+        String query="isLike = 1 ORDER BY distance ASC";
 
         handler=new RecyclerViewHandler(context,listView,query);
     }

@@ -27,4 +27,15 @@
     <string name="local_emergency_string">緊急</string>
 
     <string name="search_hint_string">搜尋景點...</string>
+    
+    <string-array name="author_main">
+        <item>程式</item>
+        <item>設計</item>
+        <item>撰寫</item>
+    </string-array>
+    <string-array name="author_sub">
+        <item>阿貓 阿國</item>
+        <item>互動一</item>
+        <item>電機一</item>
+    </string-array>
 </resources>

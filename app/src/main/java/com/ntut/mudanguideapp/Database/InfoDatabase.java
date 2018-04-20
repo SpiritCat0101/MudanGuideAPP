@@ -17,7 +17,7 @@ public class InfoDatabase {
     private String DB_PATH;
     private final String DB_NAME="SightInfo_Database.db";
     private final String Table_name="SightInfo";
-    private String[] DB_menu={"_id","name","content","Lat","Lng","isLike","village"};
+    private String[] DB_menu={"_id","name","content","Lat","Lng","isLike","village","distance"};
     private final Context context;
     private SQLiteDatabase myDataBase;
 
@@ -78,7 +78,7 @@ public class InfoDatabase {
         return c;
     }
 
-    public void updateDB(int _id,String name,String content,double Lat,double Lng,int isLike,String village){
+    public void updateDB(int _id,String name,String content,double Lat,double Lng,int isLike,String village,float distance){
         ContentValues cv=new ContentValues();
 
         cv.put(DB_menu[1],name);
@@ -87,6 +87,7 @@ public class InfoDatabase {
         cv.put(DB_menu[4],Lng);
         cv.put(DB_menu[5],isLike);
         cv.put(DB_menu[6],village);
+        cv.put(DB_menu[7],distance);
 
         myDataBase.update(Table_name,cv,"_id = "+Integer.toString(_id),null);
         Log.i("InfoDatabase","update success");

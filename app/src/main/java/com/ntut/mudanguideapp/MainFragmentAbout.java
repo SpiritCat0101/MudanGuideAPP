@@ -2,17 +2,15 @@ package com.ntut.mudanguideapp;
 
 import android.app.Activity;
 import android.content.Context;
-import android.location.Location;
+import android.util.AttributeSet;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public class MainFragmentAbout extends PagerActive {
     private Context context;
-    private Activity activity;
 
     private ListView listView;
     private String[] from={"main","sub"};
@@ -21,10 +19,12 @@ public class MainFragmentAbout extends PagerActive {
     public MainFragmentAbout(Context c, Activity a){
         super(c);
         context=c;
-        activity=a;
-        listView = activity.findViewById(R.id.about_list);
+
+        listView = a.findViewById(R.id.about_list);
         setUpList();
     }
+
+    public MainFragmentAbout (Context context, AttributeSet attrs) { super(context, attrs); }
 
     @Override
     public void startView(){

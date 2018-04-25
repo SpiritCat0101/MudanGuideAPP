@@ -2,6 +2,7 @@ package com.ntut.mudanguideapp.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.util.SparseArray;
@@ -13,10 +14,8 @@ import android.widget.TextView;
 
 import com.ntut.mudanguideapp.Database.InfoDatabase;
 import com.ntut.mudanguideapp.R;
-import com.ntut.mudanguideapp.launch;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder> {
     private Context context;
@@ -71,6 +70,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         View.OnClickListener mapClick=new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String loc=String.valueOf(Lat)+","+String.valueOf(Lng);
+                Uri gmmIntentUri = Uri.parse("geo:"+loc+"?z=14&q="+loc+"("+name+")");
+                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                mapIntent.setPackage("com.google.android.apps.maps");
+                if (mapIntent.resolveActivity(context.getPackageManager()) != null) {
+                    context.startActivity(mapIntent);
+                }
                 Log.i("RecycleAdapter","map click");
             }
         };
@@ -87,8 +93,15 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.likeIcon.setOnClickListener(likeClick);
         holder.likeText.setOnClickListener(likeClick);
 
-        holder.mapIcon.setOnClickListener(mapClick);
-        holder.mapText.setOnClickListener(mapClick);
+        if(Lat==0 && Lng==0){
+            holder.mapIcon.setVisibility(View.GONE);
+            holder.mapText.setVisibility(View.GONE);
+        }else{
+            holder.mapIcon.setVisibility(View.VISIBLE);
+            holder.mapText.setVisibility(View.VISIBLE);
+            holder.mapIcon.setOnClickListener(mapClick);
+            holder.mapText.setOnClickListener(mapClick);
+        }
     }
 
     @Override

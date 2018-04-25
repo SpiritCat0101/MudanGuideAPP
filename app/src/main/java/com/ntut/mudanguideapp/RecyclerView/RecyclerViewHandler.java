@@ -10,7 +10,6 @@ import android.util.SparseArray;
 import com.ntut.mudanguideapp.Database.InfoDatabase;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class RecyclerViewHandler {
     private Context context;

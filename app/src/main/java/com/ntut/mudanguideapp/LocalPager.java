@@ -1,18 +1,12 @@
 package com.ntut.mudanguideapp;
 
 import android.content.Context;
-import android.database.Cursor;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 
-import com.ntut.mudanguideapp.Database.InfoDatabase;
-import com.ntut.mudanguideapp.RecyclerView.RecyclerViewAdapter;
 import com.ntut.mudanguideapp.RecyclerView.RecyclerViewHandler;
-
-import java.util.ArrayList;
-import java.util.HashMap;
 
 public class LocalPager extends PagerView {
     private Context context;
@@ -27,7 +21,7 @@ public class LocalPager extends PagerView {
     private RecyclerView listView;
     private RecyclerViewHandler handler;
 
-    LocalPager(Context c, int page){
+    public LocalPager(Context c, int page){
         super(c);
         context=c;
 
@@ -37,6 +31,8 @@ public class LocalPager extends PagerView {
         setUpList(page);
         addView(view);
     }
+
+    public LocalPager(Context context, AttributeSet attrs) { super(context, attrs); }
 
     @Override
     public void onRefresh(Object obj) {

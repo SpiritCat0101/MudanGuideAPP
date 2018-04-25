@@ -4,9 +4,9 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.location.Location;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
+import android.util.AttributeSet;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -17,7 +17,6 @@ import com.google.android.gms.maps.model.LatLng;
 
 public class MainFragmentMap extends PagerActive {
     private Context context;
-    private Activity activity;
 
     private GoogleMap mMap;
     private SupportMapFragment mapFragment;
@@ -25,11 +24,12 @@ public class MainFragmentMap extends PagerActive {
     public MainFragmentMap(Context c, Activity a){
         super(c);
         context=c;
-        activity=a;
 
-        mapFragment =(SupportMapFragment) ((FragmentActivity)activity)
+        mapFragment =(SupportMapFragment) ((FragmentActivity)a)
                 .getSupportFragmentManager().findFragmentById(R.id.map);
     }
+
+    public MainFragmentMap(Context context, AttributeSet attrs) { super(context, attrs); }
 
     @Override
     public void startView(){

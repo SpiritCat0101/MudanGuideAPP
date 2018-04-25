@@ -57,8 +57,6 @@ public class LocationHandler{
         Log.i("LocationHandler","construct success");
     }
 
-    public Location getCurrentLocation(){return currentLocation;}
-
     public void startLocationUpdates(LocationChangeListener listener){
         locationChangeListener=listener;
         Log.i("LocationHandler","start update");

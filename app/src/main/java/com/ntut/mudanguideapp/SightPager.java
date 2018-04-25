@@ -1,31 +1,15 @@
 package com.ntut.mudanguideapp;
 
 import android.content.Context;
-import android.database.Cursor;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 
-import com.ntut.mudanguideapp.Database.InfoDatabase;
-import com.ntut.mudanguideapp.RecyclerView.RecyclerUpdateListener;
-import com.ntut.mudanguideapp.RecyclerView.RecyclerViewAdapter;
 import com.ntut.mudanguideapp.RecyclerView.RecyclerViewHandler;
-
-import java.util.ArrayList;
-import java.util.HashMap;
 
 public class SightPager extends PagerView {
     private Context context;
-
-    private static final String[] villageName={
-            "牡丹村",
-            "石門村",
-            "東源村",
-            "旭海村",
-            "高士村",
-            "四海村"
-    };
 
     private static final String[] villageCat={
             "SI",
@@ -48,6 +32,8 @@ public class SightPager extends PagerView {
         setUpList(page);
         addView(view);
     }
+
+    public SightPager(Context context, AttributeSet attrs) { super(context, attrs); }
 
     @Override
     public void onRefresh(Object obj){

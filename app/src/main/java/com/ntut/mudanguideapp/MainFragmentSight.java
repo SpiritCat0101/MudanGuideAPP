@@ -2,21 +2,19 @@ package com.ntut.mudanguideapp;
 
 import android.app.Activity;
 import android.content.Context;
-import android.location.Location;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainFragmentSight extends PagerActive {
     private Context context;
-    private Activity activity;
 
     private TabLayout tabLayout;
     private ViewPager viewPager;
@@ -26,12 +24,14 @@ public class MainFragmentSight extends PagerActive {
     public MainFragmentSight(Context c, Activity a){
         super(c);
         context=c;
-        activity=a;
-        tabLayout=activity.findViewById(R.id.sight_tabs);
-        viewPager=activity.findViewById(R.id.sight_pager);
+
+        tabLayout=a.findViewById(R.id.sight_tabs);
+        viewPager=a.findViewById(R.id.sight_pager);
 
         setUpTab();
     }
+
+    public MainFragmentSight(Context context, AttributeSet attrs) { super(context, attrs); }
 
     @Override
     public void startView(){

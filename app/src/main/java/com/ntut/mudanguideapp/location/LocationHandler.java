@@ -49,8 +49,6 @@ public class LocationHandler{
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(context);
         if(checkPermission()){
             createLocationRequest();
-            checkLocationSetting();
-            getLastLocation();
         }else{
             Log.i("LocationHandler","ACCESS_FINE_LOCATION DENIED");
         }
@@ -93,24 +91,24 @@ public class LocationHandler{
         Log.i("LocationHandler","location request create success");
     }
 
-    private void checkLocationSetting(){
-        LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder()
-                .addLocationRequest(mLocationRequest);
-        SettingsClient client = LocationServices.getSettingsClient(context);
-        Task<LocationSettingsResponse> task = client.checkLocationSettings(builder.build());
-        task.addOnFailureListener(activity, new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                if (e instanceof ResolvableApiException) {
-                    // Location settings are not satisfied, but this can be fixed
-                    Log.i("LocationHandler","settings are not satisfied");
-                    stopLocationUpdates();
-                    Toast.makeText(context, "請開啟定位服務", Toast.LENGTH_LONG).show();
-                    context.startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
-                }
-            }
-        });
-    }
+//    private void checkLocationSetting(){
+//        LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder()
+//                .addLocationRequest(mLocationRequest);
+//        SettingsClient client = LocationServices.getSettingsClient(context);
+//        Task<LocationSettingsResponse> task = client.checkLocationSettings(builder.build());
+//        task.addOnFailureListener(activity, new OnFailureListener() {
+//            @Override
+//            public void onFailure(@NonNull Exception e) {
+//                if (e instanceof ResolvableApiException) {
+//                    // Location settings are not satisfied, but this can be fixed
+//                    Log.i("LocationHandler","settings are not satisfied");
+//                    stopLocationUpdates();
+//                    Toast.makeText(context, "請開啟定位服務", Toast.LENGTH_LONG).show();
+//                    context.startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+//                }
+//            }
+//        });
+//    }
 
     private boolean checkPermission(){
         boolean check_permission=true;
@@ -123,18 +121,18 @@ public class LocationHandler{
         return check_permission;
     }
 
-    @SuppressWarnings("MissingPermission")
-    private void getLastLocation(){
-        Log.i("LocationHandler","trying get last location");
-        mFusedLocationClient.getLastLocation()
-                .addOnCompleteListener(activity, new OnCompleteListener<Location>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Location> task) {
-                        if (task.isSuccessful() && task.getResult() != null) {
-                            Log.i("LocationHandler","location get");
-                            currentLocation = task.getResult();
-                        }
-                    }
-                });
-    }
+//    @SuppressWarnings("MissingPermission")
+//    private void getLastLocation(){
+//        Log.i("LocationHandler","trying get last location");
+//        mFusedLocationClient.getLastLocation()
+//                .addOnCompleteListener(activity, new OnCompleteListener<Location>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<Location> task) {
+//                        if (task.isSuccessful() && task.getResult() != null) {
+//                            Log.i("LocationHandler","location get");
+//                            currentLocation = task.getResult();
+//                        }
+//                    }
+//                });
+//    }
 }

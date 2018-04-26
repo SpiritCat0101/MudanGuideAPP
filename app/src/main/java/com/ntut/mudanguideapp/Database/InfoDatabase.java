@@ -43,7 +43,7 @@ public class InfoDatabase {
 
     public void CopyDB() throws IOException {  //將外部DB匯入到手機裡
         AssetManager assetManager = this.context.getAssets();
-        InputStream in = assetManager.open(this.DB_NAME);
+        InputStream in = assetManager.open("Database/"+this.DB_NAME);
         OutputStream out = new FileOutputStream(this.DB_PATH+this.DB_NAME);
         byte[] buffer = new byte[1024];
         int read;

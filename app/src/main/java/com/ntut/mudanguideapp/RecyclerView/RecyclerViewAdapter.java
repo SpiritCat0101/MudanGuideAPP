@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ntut.mudanguideapp.Database.InfoDatabase;
 import com.ntut.mudanguideapp.R;
@@ -76,6 +77,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 mapIntent.setPackage("com.google.android.apps.maps");
                 if (mapIntent.resolveActivity(context.getPackageManager()) != null) {
                     context.startActivity(mapIntent);
+                }else{
+                    Toast.makeText(context, "Oops, some error happen, please try again later", Toast.LENGTH_SHORT).show();
                 }
                 Log.i("RecycleAdapter","map click");
             }

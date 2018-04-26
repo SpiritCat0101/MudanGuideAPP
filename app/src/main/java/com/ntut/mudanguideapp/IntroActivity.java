@@ -3,6 +3,7 @@ package com.ntut.mudanguideapp;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.webkit.WebView;
@@ -18,6 +19,7 @@ public class IntroActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.intro_toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         setTitle("");
 
@@ -35,6 +37,12 @@ public class IntroActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:
+                finish();
+                break;
+        }
+
         return super.onOptionsItemSelected(item);
     }
 }

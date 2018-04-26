@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ntut.mudanguideapp.Database.InfoDatabase;
+import com.ntut.mudanguideapp.IntroActivity;
 import com.ntut.mudanguideapp.R;
 
 import java.util.ArrayList;
@@ -64,7 +65,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         View.OnClickListener contentClick=new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i("RecycleAdapter","content id = "+String.valueOf(_id));
+                context.startActivity(new Intent(context, IntroActivity.class));
             }
         };
 

@@ -18,7 +18,6 @@
             android:background="@color/colorPrimary"
             app:elevation="0dp"
             android:theme="@style/AppTheme.AppBarOverlay">
-
             <FrameLayout
                 android:id="@+id/toolbar_container"
                 android:layout_width="match_parent"
@@ -29,7 +28,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="6dp"
-                    android:background="?attr/colorPrimary"
+                    android:background="@color/colorPrimary"
                     app:popupTheme="@style/AppTheme.PopupOverlay">
                     <TextView
                         android:layout_width="wrap_content"

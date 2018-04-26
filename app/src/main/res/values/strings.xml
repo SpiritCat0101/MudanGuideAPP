@@ -20,14 +20,14 @@
     <string name="village_macaren_string">旭海村</string>
     <string name="village_kuskus_string">高士村</string>
     <string name="village_sedraki_string">四海村</string>
-    
+
     <string name="local_hotel_string">住宿</string>
     <string name="local_food_string">飲食</string>
     <string name="local_commute_string">交通</string>
     <string name="local_emergency_string">緊急</string>
 
     <string name="search_hint_string">搜尋景點...</string>
-    
+
     <string-array name="author_main">
         <item>程式</item>
         <item>設計</item>

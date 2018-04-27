@@ -190,7 +190,9 @@ public class MainActivity extends AppCompatActivity
                         cu.getDouble(4),
                         cu.getInt(5),
                         cu.getString(6),
-                        disTo
+                        disTo,
+                        cu.getString(8),
+                        cu.getString(9)
                 );
 
                 cu.moveToNext();

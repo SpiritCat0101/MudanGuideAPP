@@ -2,6 +2,7 @@ package com.ntut.mudanguideapp.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -17,6 +18,8 @@ import com.ntut.mudanguideapp.Database.InfoDatabase;
 import com.ntut.mudanguideapp.IntroActivity;
 import com.ntut.mudanguideapp.R;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder> {
@@ -93,7 +96,15 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.nameText.setText(name);
         holder.nameText.setOnClickListener(contentClick);
 
+        try{
+            InputStream ims = context.getAssets().open("Img/"+previewImg);
+            Drawable d=Drawable.createFromStream(ims,null);
+            holder.previewImage.setImageDrawable(d);
+        }catch (IOException e){
+            e.printStackTrace();
+        }
         holder.previewImage.setOnClickListener(contentClick);
+
         if(isLike == 1){
             holder.likeIcon.setImageResource(R.mipmap.ic_star_black_36dp);
         }else{

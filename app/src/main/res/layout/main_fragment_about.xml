@@ -4,9 +4,8 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimary">
 
-    <ListView
-        android:id="@+id/about_list"
+    <FrameLayout
+        android:id="@+id/preference_frame"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="6dp" />
+        android:layout_height="match_parent"/>
 </LinearLayout>

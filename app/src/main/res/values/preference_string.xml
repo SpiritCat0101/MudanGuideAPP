@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="category_author">作者</string>
+    <string name="pref_author_program_title">程式</string>
+    <string name="pref_author_program_summary">阿貓，阿國</string>
+    <string name="pref_author_design_title">設計</string>
+    <string name="pref_author_design_summary">互動待補</string>
+    <string name="pref_author_data_title">撰寫</string>
+    <string name="pref_author_data_summary">機電</string>
+
+    <string name="category_link">鏈接</string>
+    <string name="pref_link_official_title">牡丹鄉官網</string>
+    <string name="pref_link_official_summary">"https://www.pthg.gov.tw/townmdt"</string>
+
+    <string name="category_DB">資料庫</string>
+    <string name="pref_DB_title">重設資料庫</string>
+</resources>

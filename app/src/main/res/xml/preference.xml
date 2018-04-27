@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:title="@string/category_author"
+        android:key="pref_author_category">
+        <Preference
+            android:title="@string/pref_author_program_title"
+            android:summary="@string/pref_author_program_summary"/>
+        <Preference
+            android:title="@string/pref_author_design_title"
+            android:summary="@string/pref_author_design_summary"/>
+        <Preference
+            android:title="@string/pref_author_data_title"
+            android:summary="@string/pref_author_data_summary"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/category_link">
+        <Preference
+            android:title="@string/pref_link_official_title"
+            android:summary="@string/pref_link_official_summary"
+            android:key="pref_link_official"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/category_DB"
+        android:key="pref_DB_category">
+        <Preference
+            android:key="pref_DB"
+            android:title="@string/pref_DB_title"/>
+    </PreferenceCategory>
+</PreferenceScreen>

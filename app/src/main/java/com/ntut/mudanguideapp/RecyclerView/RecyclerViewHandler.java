@@ -51,6 +51,8 @@ public class RecyclerViewHandler {
             sparseArray.append(5,cu.getInt(5));
             sparseArray.append(6,cu.getString(6));
             sparseArray.append(7,cu.getFloat(7));
+            sparseArray.append(8,cu.getString(8));
+            sparseArray.append(9,cu.getString(9));
             arrayList.add(sparseArray);
             cu.moveToNext();
         }
@@ -76,6 +78,8 @@ public class RecyclerViewHandler {
             sparseArray.append(5,cu.getInt(5));
             sparseArray.append(6,cu.getString(6));
             sparseArray.append(7,cu.getFloat(7));
+            sparseArray.append(8,cu.getString(8));
+            sparseArray.append(9,cu.getString(9));
             arrayList.add(sparseArray);
             cu.moveToNext();
         }

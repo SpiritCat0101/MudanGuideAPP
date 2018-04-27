@@ -51,12 +51,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         final int isLike=(int) myValues.get(pos).get(5);
         final String village=(String) myValues.get(pos).get(6);
         final Float distance=(float) myValues.get(pos).get(7);
+        final String previewImg=(String) myValues.get(pos).get(8);
+        final String html=(String) myValues.get(pos).get(9);
 
         View.OnClickListener likeClick=new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 infoDatabase.OpenDB();
-                infoDatabase.updateDB(_id,name,content,Lat,Lng,(isLike+1)%2,village,distance);
+                infoDatabase.updateDB(_id,name,content,Lat,Lng,(isLike+1)%2,village,distance,previewImg,html);
                 infoDatabase.CloseDB();
                 listener.onUpdate();
             }
@@ -65,7 +67,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         View.OnClickListener contentClick=new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                context.startActivity(new Intent(context, IntroActivity.class));
+                Intent intent=new Intent(context, IntroActivity.class);
+                intent.putExtra("_id",_id);
+                intent.putExtra("html",html);
+                context.startActivity(intent);
             }
         };
 

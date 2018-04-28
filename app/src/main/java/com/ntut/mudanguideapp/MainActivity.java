@@ -25,8 +25,6 @@ import com.ntut.mudanguideapp.location.LocationHandler;
 import java.util.ArrayList;
 import java.util.List;
 
-/* Create By SpiritCat and in charge */
-
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private static final int BACK_PRESSED_INTERVAL = 2000;
@@ -75,7 +73,7 @@ public class MainActivity extends AppCompatActivity
         searchView.setOnQueryTextListener(oqtl);
         searchView.setOnSearchViewListener(svl);
 
-        locationHandler=new LocationHandler(this,this);
+        locationHandler=new LocationHandler(this);
 
         previousLocation=new Location("previousLocation");
         previousLocation.setLatitude(0);
@@ -169,6 +167,13 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+    void changePage(int page){
+        pageList.get(currentPage).stopView();
+        pageList.get(page).startView();
+        flipper.setDisplayedChild(page);
+        currentPage=page;
+    }
+
     private void updateDistance(Location currentLocation){
         float distance=currentLocation.distanceTo(previousLocation);
         Log.i("main",String.valueOf(distance));
@@ -204,20 +209,13 @@ public class MainActivity extends AppCompatActivity
 
     private void setUpPageList(){
         pageList=new ArrayList<>();
-        pageList.add(new MainFragmentHome(this,this));
+        pageList.add(new MainFragmentHome(this,this,this));
         pageList.add(new MainFragmentMap(this,this));
         pageList.add(new MainFragmentLocal(this,this));
         pageList.add(new MainFragmentSight(this,this));
         pageList.add(new MainFragmentLike(this,this));
         pageList.add(new MainFragmentAbout(this,this));
         pageList.add(new MainFragmentSearchResult(this,this));
-    }
-
-    private void changePage(int page){
-        pageList.get(currentPage).stopView();
-        pageList.get(page).startView();
-        flipper.setDisplayedChild(page);
-        currentPage=page;
     }
 
     private LocationChangeListener lcl=new LocationChangeListener() {

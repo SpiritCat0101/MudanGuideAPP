@@ -6,29 +6,29 @@
         android:id="@+id/group_home">
         <item android:id="@+id/home"
             android:icon="@mipmap/ic_home_black_36dp"
-            android:title="@string/drawer_home_string"/>
+            android:title="@string/home_string"/>
         <item android:id="@+id/map"
             android:icon="@mipmap/ic_map_black_36dp"
-            android:title="@string/drawer_map_string"/>
+            android:title="@string/map_string"/>
     </group>
 
     <group android:checkableBehavior="single"
         android:id="@+id/group_info">
         <item android:id="@+id/local"
             android:icon="@mipmap/ic_info_black_36dp"
-            android:title="@string/drawer_local_string"/>
+            android:title="@string/local_string"/>
         <item android:id="@+id/sight"
             android:icon="@mipmap/ic_location_on_black_36dp"
-            android:title="@string/drawer_sight_string"/>
+            android:title="@string/sight_string"/>
         <item android:id="@+id/like"
             android:icon="@mipmap/ic_star_black_36dp"
-            android:title="@string/drawer_like_string"/>
+            android:title="@string/like_string"/>
     </group>
 
     <group android:checkableBehavior="single"
         android:id="@+id/group_about">
         <item android:id="@+id/about"
             android:icon="@mipmap/ic_forum_black_36dp"
-            android:title="@string/drawer_about_string"/>
+            android:title="@string/about_string"/>
     </group>
 </menu>

@@ -1,37 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<android.support.v4.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ScrollView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="506dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:foreground="@drawable/gradient_front"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/home_back" />
+
         <LinearLayout
+            android:id="@+id/home_button_group"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="250dp"
+            android:orientation="horizontal"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp">
+
+            <LinearLayout
+                android:id="@+id/home_local"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="6dp"
+                android:layout_weight="1"
+                android:background="@drawable/layout_round"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="6dp"
+                    android:adjustViewBounds="true"
+                    android:maxHeight="25dp"
+                    android:maxWidth="25dp"
+                    android:scaleType="fitCenter"
+                    android:tint="@color/colorPrimaryDark"
+                    app:srcCompat="@mipmap/ic_info_black_36dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/local_string"
+                    android:textAlignment="center" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/home_sight"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="6dp"
+                android:layout_weight="1"
+                android:background="@drawable/layout_round"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="6dp"
+                    android:adjustViewBounds="true"
+                    android:maxHeight="25dp"
+                    android:maxWidth="25dp"
+                    android:scaleType="fitCenter"
+                    android:tint="@color/colorPrimaryDark"
+                    app:srcCompat="@mipmap/ic_location_on_black_36dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sight_string"
+                    android:textAlignment="center" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/home_like"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="6dp"
+                android:layout_weight="1"
+                android:background="@drawable/layout_round"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="6dp"
+                    android:adjustViewBounds="true"
+                    android:maxHeight="25dp"
+                    android:maxWidth="25dp"
+                    android:scaleType="fitCenter"
+                    android:tint="@color/colorPrimaryDark"
+                    app:srcCompat="@mipmap/ic_star_black_36dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/like_string"
+                    android:textAlignment="center" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/mainList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:layout_below="@id/home_button_group"
+            android:padding="16dp" >
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="208dp"
-                android:layout_weight="1.5"
-                android:background="@drawable/side_nav_bar"
-                android:text="認識牡丹"
-                android:textAlignment="textStart"
-                app:layout_constraintEnd_toEndOf="parent" />
+        </android.support.v7.widget.RecyclerView>
+    </RelativeLayout>
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/mainList"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.5"
-                android:padding="16dp" />
-
-        </LinearLayout>
-    </ScrollView>
-
-</android.support.constraint.ConstraintLayout>
+</android.support.v4.widget.NestedScrollView>

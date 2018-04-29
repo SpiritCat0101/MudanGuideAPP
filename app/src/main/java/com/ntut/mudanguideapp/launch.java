@@ -31,11 +31,7 @@ public class launch extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_launch);
         infoDatabase=new InfoDatabase(this);
-        try{
-            infoDatabase.CopyDB();
-        }catch (IOException e){
-            e.printStackTrace();
-        }
+        infoDatabase.versionSync();
     }
 
     @Override

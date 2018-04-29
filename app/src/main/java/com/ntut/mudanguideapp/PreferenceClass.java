@@ -60,12 +60,7 @@ public class PreferenceClass extends PreferenceFragment {
         builder.setPositiveButton("確定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                try{
-                    infoDatabase.CopyDB();
-                    Log.i("pref","Copy success");
-                }catch (IOException e){
-                    Log.i("pref","Copy fail");
-                }
+                infoDatabase.copyDB();
                 System.exit(0);
             }
         });

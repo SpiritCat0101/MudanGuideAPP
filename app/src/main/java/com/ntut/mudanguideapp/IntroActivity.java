@@ -28,7 +28,7 @@ public class IntroActivity extends AppCompatActivity {
 
         webContainer = findViewById(R.id.intro_web);
         webView = new WebView(this);
-        webView.loadUrl("file:///android_asset/HTML/FourforestsIntro.html");
+        webView.loadUrl("file:///android_asset/HTML/GaoshiTrafficInfo.html");
         webContainer.addView(webView);
     }
 

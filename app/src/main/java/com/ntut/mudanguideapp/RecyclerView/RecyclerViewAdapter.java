@@ -73,6 +73,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 Intent intent=new Intent(context, IntroActivity.class);
                 intent.putExtra("_id",_id);
                 intent.putExtra("html",html);
+                intent.putExtra("name",name);
                 context.startActivity(intent);
             }
         };

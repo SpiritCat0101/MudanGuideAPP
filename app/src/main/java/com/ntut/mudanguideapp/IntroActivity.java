@@ -1,5 +1,6 @@
 package com.ntut.mudanguideapp;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -8,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.webkit.WebView;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
 public class IntroActivity extends AppCompatActivity {
     private FrameLayout webContainer;
@@ -17,18 +19,20 @@ public class IntroActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intro);
+        Intent intent = getIntent();
 
         Toolbar toolbar = findViewById(R.id.intro_toolbar);
         setSupportActionBar(toolbar);
         if(getSupportActionBar()!=null){
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setDisplayShowTitleEnabled(false);
         }
         getWindow().setStatusBarColor(getColor(R.color.colorPrimaryDark));
+        TextView textView = findViewById(R.id.textView);
+        textView.setText(intent.getStringExtra("name"));
 
         webContainer = findViewById(R.id.intro_web);
         webView = new WebView(this);
-        webView.loadUrl("file:///android_asset/HTML/MudanMountain.html");
+        webView.loadUrl("file:///android_asset/HTML/"+intent.getStringExtra("html"));
         webContainer.addView(webView);
     }
 

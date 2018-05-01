@@ -25,9 +25,11 @@ public class IntroActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         if(getSupportActionBar()!=null){
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
         }
         getWindow().setStatusBarColor(getColor(R.color.colorPrimaryDark));
-        TextView textView = findViewById(R.id.textView);
+
+        TextView textView = findViewById(R.id.intro_title);
         textView.setText(intent.getStringExtra("name"));
 
         webContainer = findViewById(R.id.intro_web);

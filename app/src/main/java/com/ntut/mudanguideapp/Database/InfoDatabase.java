@@ -13,7 +13,7 @@ public class InfoDatabase{
      *  Database version for check update
      *  Execute PRAGMA user_version = [version] in database to modify new version
      */
-    private static final int DATABASE_VERSION = 0;
+    private static final int DATABASE_VERSION = 1;
 
     private static final String DB_NAME="SightInfo_Database";
     private static final String Table_name="SightInfo";

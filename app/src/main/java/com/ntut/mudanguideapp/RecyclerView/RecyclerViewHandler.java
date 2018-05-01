@@ -45,12 +45,9 @@ public class RecyclerViewHandler {
             SparseArray<Object> sparseArray=new SparseArray<>();
             sparseArray.append(0,cu.getInt(0));
             sparseArray.append(1,cu.getString(1));
-            sparseArray.append(2,cu.getString(2));
             sparseArray.append(3,cu.getDouble(3));
             sparseArray.append(4,cu.getDouble(4));
             sparseArray.append(5,cu.getInt(5));
-            sparseArray.append(6,cu.getString(6));
-            sparseArray.append(7,cu.getFloat(7));
             sparseArray.append(8,cu.getString(8));
             sparseArray.append(9,cu.getString(9));
             arrayList.add(sparseArray);
@@ -72,12 +69,9 @@ public class RecyclerViewHandler {
             SparseArray<Object> sparseArray=new SparseArray<>();
             sparseArray.append(0,cu.getInt(0));
             sparseArray.append(1,cu.getString(1));
-            sparseArray.append(2,cu.getString(2));
             sparseArray.append(3,cu.getDouble(3));
             sparseArray.append(4,cu.getDouble(4));
             sparseArray.append(5,cu.getInt(5));
-            sparseArray.append(6,cu.getString(6));
-            sparseArray.append(7,cu.getFloat(7));
             sparseArray.append(8,cu.getString(8));
             sparseArray.append(9,cu.getString(9));
             arrayList.add(sparseArray);

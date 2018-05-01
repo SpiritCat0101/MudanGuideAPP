@@ -31,7 +31,6 @@ public class launch extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_launch);
         infoDatabase=new InfoDatabase(this);
-        infoDatabase.versionSync();
     }
 
     @Override
@@ -42,6 +41,7 @@ public class launch extends AppCompatActivity {
             public void run() {
                 try{
                     getPermission();
+                    infoDatabase.versionSync();
                     if(check_permission){
                         Thread.sleep(2000);
                         startActivity(new Intent(launch.this,MainActivity.class));

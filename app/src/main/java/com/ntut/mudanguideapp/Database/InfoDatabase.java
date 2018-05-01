@@ -74,6 +74,33 @@ public class InfoDatabase{
         Log.i("InfoDatabase","update success");
     }
 
+    public boolean updateIsLike(int _id){
+        Cursor cu = this.getCursor("_id = "+String.valueOf(_id),null);
+
+        if(cu.getCount()==1){
+            cu.moveToFirst();
+            this.updateDB(
+                    _id,
+                    cu.getString(1),
+                    cu.getString(2),
+                    cu.getDouble(3),
+                    cu.getDouble(4),
+                    (cu.getInt(5)+1)%2,
+                    cu.getString(6),
+                    cu.getFloat(7),
+                    cu.getString(8),
+                    cu.getString(9)
+            );
+            cu.close();
+            Log.i("InfoDatabase","isLike update");
+            return true;
+        }else{
+            cu.close();
+            Log.i("InfoDatabase","isLike update fail conflict id");
+            return false;
+        }
+    }
+
     public void versionSync(){
         this.OpenDB();
 

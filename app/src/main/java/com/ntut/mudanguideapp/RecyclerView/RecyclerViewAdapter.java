@@ -48,12 +48,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public void onBindViewHolder(final RecyclerViewAdapter.MyViewHolder holder, final int pos) {
         final int _id=(int) myValues.get(pos).get(0);
         final String name=(String) myValues.get(pos).get(1);
-        final String content=(String) myValues.get(pos).get(2);
         final double Lat=(double) myValues.get(pos).get(3);
         final double Lng=(double) myValues.get(pos).get(4);
         final int isLike=(int) myValues.get(pos).get(5);
-        final String village=(String) myValues.get(pos).get(6);
-        final Float distance=(float) myValues.get(pos).get(7);
         final String previewImg=(String) myValues.get(pos).get(8);
         final String html=(String) myValues.get(pos).get(9);
 
@@ -61,7 +58,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             @Override
             public void onClick(View v) {
                 infoDatabase.OpenDB();
-                infoDatabase.updateDB(_id,name,content,Lat,Lng,(isLike+1)%2,village,distance,previewImg,html);
+                infoDatabase.updateIsLike(_id);
                 infoDatabase.CloseDB();
                 listener.onUpdate();
             }

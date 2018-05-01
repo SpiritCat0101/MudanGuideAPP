@@ -4,6 +4,6 @@
     <item
         android:id="@+id/action_search"
         android:icon="@mipmap/ic_search_black_36dp"
-        android:title="search"
+        android:title="@string/action_search_string"
         app:showAsAction="always" />
 </menu>

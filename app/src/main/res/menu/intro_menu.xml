@@ -3,12 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/action_like"
-        android:title="like"
+        android:title="@string/action_like_string"
         app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/action_map"
         android:icon="@mipmap/ic_map_black_36dp"
-        android:title="map"
+        android:title="@string/action_map_string"
         app:showAsAction="ifRoom" />
 </menu>

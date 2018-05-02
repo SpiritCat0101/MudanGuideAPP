@@ -36,12 +36,12 @@ public class launch extends AppCompatActivity {
     @Override
     protected void onResume(){
         super.onResume();
+        infoDatabase.versionSync();
         new Thread(new Runnable() {
             @Override
             public void run() {
                 try{
                     getPermission();
-                    infoDatabase.versionSync();
                     if(check_permission){
                         Thread.sleep(2000);
                         startActivity(new Intent(launch.this,MainActivity.class));

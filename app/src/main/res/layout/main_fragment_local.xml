@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -10,8 +11,9 @@
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
         android:elevation="5dp"
-        app:tabSelectedTextColor="@color/colorAccent"
-        app:tabTextColor="@color/black"
+        app:tabSelectedTextColor="@color/colorTabSelect"
+        app:tabIndicatorColor="@color/colorTabSelect"
+        app:tabTextColor="@color/colorTabText"
         app:tabTextAppearance="@style/TabLayoutAppearance">
 
         <android.support.design.widget.TabItem

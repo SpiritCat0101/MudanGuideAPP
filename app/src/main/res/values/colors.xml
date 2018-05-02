@@ -10,4 +10,9 @@
     <color name="list_background">#f4f4f4</color>
     <color name="colorLike">#c7cd06</color>
     <color name="colorText">#7d6d64</color>
+
+    <color name="colorHomeIcon">#a89a91</color>
+
+    <color name="colorTabText">#991f3135</color>
+    <color name="colorTabSelect">#FF1f3135</color>
 </resources>

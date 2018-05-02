@@ -46,13 +46,14 @@
                     android:maxHeight="25dp"
                     android:maxWidth="25dp"
                     android:scaleType="fitCenter"
-                    android:tint="@color/colorPrimaryDark"
+                    android:tint="@color/colorHomeIcon"
                     app:srcCompat="@mipmap/ic_info_black_36dp" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/local_string"
+                    android:textColor="@color/colorHomeIcon"
                     android:textAlignment="center" />
             </LinearLayout>
 
@@ -74,13 +75,14 @@
                     android:maxHeight="25dp"
                     android:maxWidth="25dp"
                     android:scaleType="fitCenter"
-                    android:tint="@color/colorPrimaryDark"
+                    android:tint="@color/colorHomeIcon"
                     app:srcCompat="@mipmap/ic_location_on_black_36dp" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/sight_string"
+                    android:textColor="@color/colorHomeIcon"
                     android:textAlignment="center" />
             </LinearLayout>
 
@@ -102,13 +104,14 @@
                     android:maxHeight="25dp"
                     android:maxWidth="25dp"
                     android:scaleType="fitCenter"
-                    android:tint="@color/colorPrimaryDark"
+                    android:tint="@color/colorHomeIcon"
                     app:srcCompat="@mipmap/ic_star_black_36dp" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/like_string"
+                    android:textColor="@color/colorHomeIcon"
                     android:textAlignment="center" />
             </LinearLayout>
         </LinearLayout>

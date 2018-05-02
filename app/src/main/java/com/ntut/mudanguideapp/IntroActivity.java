@@ -44,7 +44,8 @@ public class IntroActivity extends AppCompatActivity {
 
         webContainer = findViewById(R.id.intro_web);
         webView = new WebView(this);
-        webView.loadUrl("file:///android_asset/HTML/"+intent.getStringExtra("html"));
+        //webView.loadUrl("file:///android_asset/HTML/"+intent.getStringExtra("html"));
+        webView.loadUrl("file:///android_asset/HTML/FourforestTrafficInfo.html");
         webContainer.addView(webView);
     }
 
@@ -99,7 +100,7 @@ public class IntroActivity extends AppCompatActivity {
     }
 
     public void mapClick(){
-        String loc=String.valueOf(intent.getIntExtra("Lat",0))+","+String.valueOf(intent.getIntExtra("Lng",0));
+        String loc=String.valueOf(intent.getDoubleExtra("Lat",0))+","+String.valueOf(intent.getDoubleExtra("Lng",0));
         Uri gmmIntentUri = Uri.parse("geo:"+loc+"?z=14&q="+loc+"("+intent.getStringExtra("name")+")");
         Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
         mapIntent.setPackage("com.google.android.apps.maps");

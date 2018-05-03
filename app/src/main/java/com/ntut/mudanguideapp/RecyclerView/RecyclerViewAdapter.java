@@ -71,6 +71,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 intent.putExtra("_id",_id);
                 intent.putExtra("html",html);
                 intent.putExtra("name",name);
+                intent.putExtra("Lat",Lat);
+                intent.putExtra("Lng",Lng);
                 context.startActivity(intent);
             }
         };

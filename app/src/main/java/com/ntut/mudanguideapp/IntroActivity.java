@@ -1,6 +1,7 @@
 package com.ntut.mudanguideapp;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -10,16 +11,25 @@ import android.view.MenuItem;
 import android.webkit.WebView;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.ntut.mudanguideapp.Database.InfoDatabase;
 
 public class IntroActivity extends AppCompatActivity {
     private FrameLayout webContainer;
     private WebView webView;
+    private Intent intent;
+    private MenuItem item;
+
+    private int isLike;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intro);
-        Intent intent = getIntent();
+
+        intent=getIntent();
+        getExtra();
 
         Toolbar toolbar = findViewById(R.id.intro_toolbar);
         setSupportActionBar(toolbar);
@@ -34,7 +44,8 @@ public class IntroActivity extends AppCompatActivity {
 
         webContainer = findViewById(R.id.intro_web);
         webView = new WebView(this);
-        webView.loadUrl("file:///android_asset/HTML/"+intent.getStringExtra("html"));
+        //webView.loadUrl("file:///android_asset/HTML/"+intent.getStringExtra("html"));
+        webView.loadUrl("file:///android_asset/HTML/FourforestsVillageIntro.html");
         webContainer.addView(webView);
     }
 
@@ -57,8 +68,8 @@ public class IntroActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.intro_menu, menu);
-        MenuItem item=menu.findItem(R.id.action_like);
-        item.setIcon(getDrawable(R.mipmap.ic_star_border_black_36dp));
+        item=menu.findItem(R.id.action_like);
+        iconChange();
         return true;
     }
 
@@ -68,8 +79,43 @@ public class IntroActivity extends AppCompatActivity {
             case android.R.id.home:
                 finish();
                 break;
+            case R.id.action_like:
+                InfoDatabase infoDatabase = new InfoDatabase(this);
+                infoDatabase.OpenDB();
+                infoDatabase.updateIsLike(intent.getIntExtra("_id",0));
+                isLike=(isLike+1)%2;
+                iconChange();
+                infoDatabase.CloseDB();
+                break;
+            case R.id.action_map:
+                mapClick();
+                break;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void getExtra(){
+        isLike=intent.getIntExtra("isLike",0);
+    }
+
+    public void mapClick(){
+        String loc=String.valueOf(intent.getDoubleExtra("Lat",0))+","+String.valueOf(intent.getDoubleExtra("Lng",0));
+        Uri gmmIntentUri = Uri.parse("geo:"+loc+"?z=14&q="+loc+"("+intent.getStringExtra("name")+")");
+        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+        mapIntent.setPackage("com.google.android.apps.maps");
+        if (mapIntent.resolveActivity(getPackageManager()) != null) {
+            startActivity(mapIntent);
+        }else{
+            Toast.makeText(this, "Oops, some error happen, please try again later", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void iconChange(){
+        if(isLike == 1){
+            item.setIcon(getDrawable(R.mipmap.ic_star_black_36dp));
+        }else{
+            item.setIcon(getDrawable(R.mipmap.ic_star_border_black_36dp));
+        }
     }
 }

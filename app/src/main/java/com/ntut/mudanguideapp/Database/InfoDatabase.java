@@ -117,6 +117,7 @@ public class InfoDatabase{
     public void copyDB(){
         try{
             fileHandler.copy();
+            Log.i("InfoDatabase","copy success");
         }catch (IOException e){
             e.printStackTrace();
         }

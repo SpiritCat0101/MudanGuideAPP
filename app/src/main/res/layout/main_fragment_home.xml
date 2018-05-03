@@ -47,7 +47,7 @@
                     android:maxWidth="25dp"
                     android:scaleType="fitCenter"
                     android:tint="@color/colorHomeIcon"
-                    app:srcCompat="@mipmap/ic_info_black_36dp" />
+                    app:srcCompat="@mipmap/ic_report_black_36dp" />
 
                 <TextView
                     android:layout_width="match_parent"

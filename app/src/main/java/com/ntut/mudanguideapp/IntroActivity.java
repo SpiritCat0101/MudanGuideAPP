@@ -1,6 +1,8 @@
 package com.ntut.mudanguideapp;
 
 import android.content.Intent;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -35,6 +37,7 @@ public class IntroActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         if(getSupportActionBar()!=null){
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setHomeAsUpIndicator(getDrawable(R.mipmap.ic_arrow_back_white_36dp));
             getSupportActionBar().setDisplayShowTitleEnabled(false);
         }
         getWindow().setStatusBarColor(getColor(R.color.colorPrimaryDark));
@@ -113,9 +116,9 @@ public class IntroActivity extends AppCompatActivity {
 
     public void iconChange(){
         if(isLike == 1){
-            item.setIcon(getDrawable(R.mipmap.ic_star_black_36dp));
+            item.setIcon(getDrawable(R.mipmap.ic_star_white_36dp));
         }else{
-            item.setIcon(getDrawable(R.mipmap.ic_star_border_black_36dp));
+            item.setIcon(getDrawable(R.mipmap.ic_star_border_white_36dp));
         }
     }
 }

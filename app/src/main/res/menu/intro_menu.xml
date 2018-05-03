@@ -8,7 +8,7 @@
 
     <item
         android:id="@+id/action_map"
-        android:icon="@mipmap/ic_map_black_36dp"
+        android:icon="@mipmap/ic_map_white_36dp"
         android:title="@string/action_map_string"
         app:showAsAction="ifRoom" />
 </menu>

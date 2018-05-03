@@ -15,7 +15,7 @@
     <group android:checkableBehavior="single"
         android:id="@+id/group_info">
         <item android:id="@+id/local"
-            android:icon="@mipmap/ic_info_black_36dp"
+            android:icon="@mipmap/ic_report_black_36dp"
             android:title="@string/local_string"/>
         <item android:id="@+id/sight"
             android:icon="@mipmap/ic_location_on_black_36dp"

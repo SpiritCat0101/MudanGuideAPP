@@ -54,6 +54,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         final String previewImg=(String) myValues.get(pos).get(8);
         final String html=(String) myValues.get(pos).get(9);
 
+        Log.i("previewImg",previewImg);
+
         View.OnClickListener likeClick=new View.OnClickListener() {
             @Override
             public void onClick(View v) {

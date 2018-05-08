@@ -12,12 +12,12 @@ public class SightPager extends PagerView {
     private Context context;
 
     private static final String[] villageCat={
-            "SI",
-            "TJ",
-            "MAL",
-            "MAC",
-            "KU",
-            "SE"
+            "SI", //牡丹村
+            "TJ", //石門村
+            "MAL", //東源村
+            "MAC", //旭海村
+            "KU", //高士村
+            "SE" //四海村
     };
 
     private RecyclerView listView;

@@ -150,9 +150,9 @@ public class MainActivity extends AppCompatActivity
             case R.id.map:
                 changePage(1);
                 break;
-            case R.id.local:
+            /*case R.id.local:
                 changePage(2);
-                break;
+                break;*/
             case R.id.sight:
                 changePage(3);
                 break;

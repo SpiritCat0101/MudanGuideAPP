@@ -71,6 +71,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             public void onClick(View v) {
                 Intent intent=new Intent(context, IntroActivity.class);
                 intent.putExtra("_id",_id);
+                intent.putExtra("isLike",isLike);
                 intent.putExtra("html",html);
                 intent.putExtra("name",name);
                 intent.putExtra("Lat",Lat);

@@ -150,9 +150,9 @@ public class MainActivity extends AppCompatActivity
             case R.id.map:
                 changePage(1);
                 break;
-            /*case R.id.local:
+            case R.id.local:
                 changePage(2);
-                break;*/
+                break;
             case R.id.sight:
                 changePage(3);
                 break;
@@ -211,7 +211,7 @@ public class MainActivity extends AppCompatActivity
         pageList=new ArrayList<>();
         pageList.add(new MainFragmentHome(this,this,this));
         pageList.add(new MainFragmentMap(this,this));
-        pageList.add(new MainFragmentLocal(this,this));
+        pageList.add(new MainFragmentIntro(this,this));
         pageList.add(new MainFragmentSight(this,this));
         pageList.add(new MainFragmentLike(this,this));
         pageList.add(new MainFragmentAbout(this,this));

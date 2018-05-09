@@ -8,7 +8,7 @@
 
     <string name="home_string">主頁</string>
     <string name="map_string">地圖</string>
-    <string name="local_string">地方資訊</string>
+    <string name="local_string">村落介紹</string>
     <string name="sight_string">旅遊景點</string>
     <string name="like_string">我的收藏</string>
     <string name="about_string">關於我們</string>
@@ -22,7 +22,7 @@
     <string name="village_maljipa_string">東源村</string>
     <string name="village_macaren_string">旭海村</string>
     <string name="village_kuskus_string">高士村</string>
-    <string name="village_sedraki_string">四海村</string>
+    <string name="village_sedraki_string">四林村</string>
 
     <string name="local_hotel_string">住宿</string>
     <string name="local_food_string">飲食</string>

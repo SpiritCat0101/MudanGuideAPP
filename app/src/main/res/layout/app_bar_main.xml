@@ -66,7 +66,7 @@
 
             <include
                 android:id="@+id/include_local"
-                layout="@layout/main_fragment_local" />
+                layout="@layout/main_fragment_intro" />
 
             <include
                 android:id="@+id/include_sight"
